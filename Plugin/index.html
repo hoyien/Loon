@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Loon 插件仓库</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Loon 插件中心">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="icon" href="../Icon/PluginHub/LoonPluginHub.png" type="image/png">
+  <link rel="apple-touch-icon" href="../Icon/PluginHub/LoonPluginHub-White.png">
+
+  <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
+  <style>
+    /* =========================================
+       1. 全局变量定义 (CSS Variables)
+       ========================================= */
+    :root {
+      /* 安全区域适配 */
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+      --safe-left: env(safe-area-inset-left);
+      --safe-right: env(safe-area-inset-right);
+
+      /* 浅色模式配色 */
+      --bg-body: #F2F2F7;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: rgba(255, 255, 255, 0.65);
+      --bg-input: #E3E3E8;
+      --bg-header: rgba(242, 242, 247, 0.85);
+      --text-primary: #1c1c1e;
+      --text-secondary: #8e8e93;
+      --text-tertiary: #aeaeb2;
+      --color-accent: #007aff;
+      --border-light: rgba(0, 0, 0, 0.05);
+      --border-separator: #c6c6c8;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.08);
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --glass-blur: blur(20px);
+    }
+
+    /* 深色模式适配 */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-body: #000000;
+        --bg-card: #1C1C1E;
+        --bg-card-hover: rgba(44, 44, 46, 0.75);
+        --bg-input: #2C2C2E;
+        --bg-header: rgba(0, 0, 0, 0.85);
+        --text-primary: #f2f2f7;
+        --text-secondary: #8e8e93;
+        --text-tertiary: #636366;
+        --color-accent: #0a84ff;
+        --border-light: rgba(255, 255, 255, 0.1);
+        --border-separator: #38383a;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+        --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    /* =========================================
+       2. 基础重置 (Reset)
+       ========================================= */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+    }
+
+    body {
+      line-height: 1.5;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      overscroll-behavior-y: none;
+    }
+
+    /* 修复 Safari 下的橡皮筋回弹背景色 */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -999;
+      pointer-events: none;
+      background-color: var(--bg-body);
+    }
+
+    body::before {
+      bottom: 100%;
+    }
+
+    body::after {
+      top: 100%;
+    }
+
+    input,
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      background: transparent;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    /* =========================================
+       3. 顶部导航栏 (Header)
+       ========================================= */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: calc(0.8rem + var(--safe-top));
+      padding-bottom: 0.8rem;
+      padding-left: calc(1.5rem + var(--safe-left));
+      padding-right: calc(1.5rem + var(--safe-right));
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-header);
+      backdrop-filter: saturate(180%) var(--glass-blur);
+      -webkit-backdrop-filter: saturate(180%) var(--glass-blur);
+      border-bottom: 0.5px solid var(--border-separator);
+    }
+
+    .header-logo img {
+      height: 36px;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* 标题居中绝对定位 */
+    .header-title-block {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + (var(--safe-top) / 2));
+      transform: translate(-50%, -50%);
+      width: 100%;
+      padding: 0 100px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    header p {
+      margin-top: 2px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* =========================================
+       4. 菜单与交互 (Menu & Controls)
+       ========================================= */
+    /* 汉堡菜单按钮 */
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 102;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: 2.5px;
+      background-color: var(--color-accent);
+      border-radius: 4px;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .menu-toggle span:nth-child(1) { width: 22px; }
+    .menu-toggle span:nth-child(2) { width: 16px; opacity: 1; }
+    .menu-toggle span:nth-child(3) { width: 22px; }
+
+    /* 汉堡菜单激活态动画 */
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+      background-color: var(--text-primary);
+    }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+      background-color: var(--text-primary);
+    }
+
+    /* 二级弹出菜单 */
+    .secondary-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 1.5rem;
+      background: var(--bg-card);
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      z-index: 101;
+      min-width: 180px;
+      visibility: hidden;
+      opacity: 0;
+      transform: scale(0.92) translateY(-10px);
+      transform-origin: top right;
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    }
+
+    .secondary-menu.active {
+      visibility: visible;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 14px;
+      text-decoration: none;
+      color: var(--text-primary);
+      width: 100%;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .menu-item:hover {
+      background-color: var(--bg-body);
+    }
+
+    .menu-item-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-grow: 1;
+    }
+
+    /* 图标遮罩处理 (SVG Mask) */
+    .icon {
+      width: 22px;
+      height: 22px;
+      background-color: var(--color-accent);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      flex-shrink: 0;
+    }
+
+    .icon-telegram {
+      -webkit-mask-image: url('../Icon/PluginHub/Telegram.svg');
+      mask-image: url('../Icon/PluginHub/Telegram.svg');
+    }
+
+    .icon-github {
+      -webkit-mask-image: url('../Icon/PluginHub/GitHub.svg');
+      mask-image: url('../Icon/PluginHub/GitHub.svg');
+    }
+
+    /* =========================================
+       5. 主体布局 (Main Content)
+       ========================================= */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      padding-top: calc(1.5rem + var(--safe-top));
+      padding-left: calc(1.5rem + var(--safe-left));
+      padding-right: calc(1.5rem + var(--safe-right));
+      padding-bottom: calc(2rem + var(--safe-bottom));
+    }
+
+    /* 公告横幅 */
+    .announcement-banner {
+      background-color: #fff9de;
+      border: 1px solid #e1e4e8;
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+      position: relative;
+      min-height: 3.2rem;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .announcement-banner {
+        background-color: #3a372d;
+        border-color: #444;
+      }
+    }
+
+    .banner-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: .5rem 1rem;
+      color: #1d1d1f;
+      font-size: .9rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 0;
+      white-space: nowrap;
+      transform: translateX(0);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .banner-item {
+        color: #e2e2e2;
+      }
+    }
+
+    .banner-item.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* 搜索框与标签 */
+    .search-box {
+      margin-bottom: 2rem;
+    }
+
+    #search {
+      width: 100%;
+      padding: 12px 18px;
+      font-size: 1.05rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      transition: all 0.2s;
+    }
+
+    #search:focus {
+      background: var(--bg-card);
+      box-shadow: 0 0 0 2px var(--color-accent), var(--shadow-sm);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .tabs button {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tabs button:hover {
+      color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+
+    .tabs button.active {
+      background: var(--color-accent);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+      transform: scale(1.02);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem 0.2rem;
+      color: var(--text-primary);
+    }
+
+    /* =========================================
+       6. 插件卡片列表 (Card List)
+       ========================================= */
+    .list {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.005);
+      box-shadow: var(--shadow-hover);
+      background-color: var(--bg-card-hover);
+      backdrop-filter: saturate(180%) blur(10px);
+      -webkit-backdrop-filter: saturate(180%) blur(10px);
+      z-index: 10;
+    }
+
+    .card:active {
+      transform: scale(0.97);
+      transition-duration: 0.1s;
+    }
+
+    .card-inner-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #f1f1f1;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card-icon {
+        background: #333;
+      }
+    }
+
+    .card-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-update-time {
+      margin: 0 0 0.6rem;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tags {
+      margin-top: auto;
+      padding-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-item {
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      background: rgba(0, 122, 255, 0.1);
+      border-radius: 100px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .tag-item {
+        background: rgba(10, 132, 255, 0.2);
+        color: #66b2ff;
+      }
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--text-tertiary);
+      padding: 4rem 1rem;
+      grid-column: 1 / -1;
+    }
+
+    /* =========================================
+       7. 底部 (Footer)
+       ========================================= */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-top: 2rem;
+      padding-bottom: calc(1rem + var(--safe-bottom));
+      line-height: 1.8;
+    }
+
+    /* =========================================
+       8. 桌面端适配 (Desktop Query)
+       ========================================= */
+    @media (min-width: 768px) {
+      header {
+        padding: 1rem 2rem;
+      }
+      
+      .header-title-block {
+        top: 50%;
+      }
+      
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      /* 桌面端将弹出菜单改为平铺显示 */
+      .secondary-menu {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        position: static;
+        flex-direction: row;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        min-width: auto;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .menu-item {
+        width: auto;
+        padding: 8px;
+        border-radius: 50%;
+        gap: 2px;
+      }
+
+      .menu-item:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .menu-item:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      .menu-item-content span:not(.icon) {
+        display: none;
+      }
+      
+      .menu-item-content {
+        gap: 0;
+      }
+
+      .wrap {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-logo">
+      <a href="" title="刷新页面" aria-label="刷新页面">
+        <img src="../Icon/PluginHub/LoonPluginHub.png" alt="Loon Plugin Hub Logo">
+      </a>
+    </div>
+    <div class="header-title-block">
+      <h1>Loon 插件仓库</h1>
+      <p>点击插件卡片即可跳转安装插件</p>
+    </div>
+    <div class="header-controls">
+      <button id="menu-toggle" class="menu-toggle" aria-label="更多功能" title="更多功能">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="secondary-menu" class="secondary-menu">
+        <a href="https://t.me/BoEchoBot" target="_blank" class="menu-item" aria-label="Telegram" title="Telegram">
+          <div class="menu-item-content">
+            <span class="icon icon-telegram"></span>
+            <span>Telegram</span>
+          </div>
+        </a>
+        <a href="https://github.com/sooyaaabo/Loon" target="_blank" class="menu-item" aria-label="GitHub" title="GitHub">
+          <div class="menu-item-content">
+            <span class="icon icon-github"></span>
+            <span>GitHub</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="announcement-banner" id="announcementBanner"></div>
+
+    <div class="search-box">
+      <input id="search" placeholder="搜索插件名称或标签…">
+      <div class="tabs">
+        <button class="tab active" data-cat="all">全部</button>
+        <button class="tab" data-cat="去广告">去广告</button>
+        <button class="tab" data-cat="功能增强">功能增强</button>
+        <button class="tab" data-cat="解锁会员">解锁会员</button>
+        <button class="tab" data-cat="定时任务">定时任务</button>
+      </div>
+    </div>
+
+    <div class="section-title" id="sectionTitle">正在加载…</div>
+    
+    <div class="list" id="list">
+      <div class="empty">正在从 GitHub 加载插件列表，请稍候…</div>
+    </div>
+
+    <footer>
+      <span>更新时间</span>：<span id="updateTime">--</span><br>
+      Copyright &copy; <span id="copyright-year">2025</span> sooyaaabo. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    (async () => {
+      // =========================================
+      // 1. 配置与常量 (Configuration)
+      // =========================================
+      const TEXT = {
+        repoTitle: 'Loon 插件仓库',
+        repoDesc: '点击插件卡片即可跳转安装插件',
+        telegram: 'Telegram',
+        github: 'GitHub',
+        bannerWarning: '禁止在中华人民共和国境内平台公开传播本仓库内容以及将其用于任何商业或非法用途！如有发现，请向平台举报！',
+        bannerDisclaimer: '本网站由个人制作与维护，与Loon官方无关。',
+        bannerUpdateNotice: '如果插件提示“Loon的版本过旧，插件功能受限”，请自行前往 App Store 进行软件更新。',
+        searchPlaceholder: '搜索插件名称或标签…',
+        catAll: '全部',
+        catAdblock: '去广告',
+        catEnhance: '功能增强',
+        catUnlock: '解锁会员',
+        catCron: '定时任务',
+        sectionTitle: (cat, count) => `${cat} · ${count} 个插件`,
+        loadingPlugins: '正在从 GitHub 加载插件列表，请稍候…',
+        loadFailed: (msg) => `加载插件失败：${msg}`,
+        noPluginsFound: '在仓库中没有找到任何 .lpx 文件。',
+        noMatch: '暂无匹配的插件',
+        updateTimeLabel: '更新时间',
+        cardUpdateTime: '更新于 ',
+        cardNoDesc: '暂无描述',
+        getFailed: '获取失败',
+        loading: '正在加载…'
+      };
+
+      // =========================================
+      // 2. DOM 元素获取 (DOM Selection)
+      // =========================================
+      const menuToggle = document.getElementById('menu-toggle');
+      const secondaryMenu = document.getElementById('secondary-menu');
+      const listEl = document.getElementById('list');
+      const searchEl = document.getElementById('search');
+      const tabsEl = document.querySelector('.tabs');
+      const sectionTitleEl = document.getElementById('sectionTitle');
+      const updateTimeEl = document.getElementById('updateTime');
+
+      // =========================================
+      // 3. 初始化 UI (UI Initialization)
+      // =========================================
+      
+      // 初始化横幅公告内容
+      const bannerContainer = document.getElementById('announcementBanner');
+      const bannerMessages = [TEXT.bannerWarning, TEXT.bannerDisclaimer, TEXT.bannerUpdateNotice];
+      bannerMessages.forEach((message, index) => {
+        const p = document.createElement('p');
+        p.className = 'banner-item';
+        if (index === 0) p.classList.add('active'); // 默认显示第一条
+        p.textContent = message;
+        bannerContainer.appendChild(p);
+      });
+
+      // 设置静态文本内容
+      document.querySelector('h1').textContent = TEXT.repoTitle;
+      document.querySelector('header p').textContent = TEXT.repoDesc;
+      searchEl.placeholder = TEXT.searchPlaceholder;
+      
+      // 设置 Tab 按钮文本
+      document.querySelectorAll('.tab').forEach(btn => {
+        const cat = btn.dataset.cat;
+        btn.textContent = TEXT[`cat${cat === 'all' ? 'All' : cat === '去广告' ? 'Adblock' : cat === '功能增强' ? 'Enhance' : cat === '解锁会员' ? 'Unlock' : 'Cron'}`];
+      });
+      
+      document.querySelector('footer span').textContent = TEXT.updateTimeLabel;
+      document.querySelector('#list .empty').textContent = TEXT.loadingPlugins;
+      sectionTitleEl.textContent = TEXT.loading;
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+      // =========================================
+      // 5. 数据获取与处理 (Data Fetching & Processing)
+      // =========================================
+      let plugins = [];
+
+      const GITHUB_REPO = 'sooyaaabo/Loon';
+      const PLUGIN_DIR_PATH = 'Plugin';
+
+      try {
+        // 请求 GitHub API 获取文件列表
+        const allFilesResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${PLUGIN_DIR_PATH}`);
+        const allFiles = await allFilesResponse.json();
+        
+        if (!Array.isArray(allFiles)) throw new Error('无效的 GitHub API 响应。');
+
+        // 筛选出 .lpx 后缀的文件
+        const pluginFiles = allFiles.filter(file => file.name.toLowerCase().endsWith('.lpx'));
+        if (pluginFiles.length === 0) throw new Error(TEXT.noPluginsFound);
+
+        // 并发获取所有插件文件的内容
+        const pluginContents = await Promise.all(
+          pluginFiles.map(file => fetch(file.download_url).then(res => res.text()))
+        );
+
+        // 解析文件内容提取元数据
+        plugins = pluginContents.map((text, i) => {
+          const file = pluginFiles[i];
+          // 正则匹配 #!name, #!desc 等配置项
+          const name = (text.match(/#!\s*name\s*=\s*(.+)/i) || [])[1]?.trim() || file.name;
+          const desc = (text.match(/#!\s*desc\s*=\s*(.+)/i) || [])[1]?.trim() || 'No description available';
+          const icon = (text.match(/#!\s*icon\s*=\s*(.+)/i) || [])[1]?.trim() || '';
+          const date = (text.match(/#!\s*date\s*=\s*(.+)/i) || [])[1]?.trim() || 'Unknown';
+          const tagStr = (text.match(/#!\s*tag\s*=\s*(.+)/i) || [])[1]?.trim();
+          const tags = tagStr ? tagStr.split(',').map(t => t.trim()).filter(Boolean) : [];
+          
+          return { url: file.download_url, name, desc, icon, date, tags };
+        });
+      } catch (error) {
+        listEl.innerHTML = `<div class="empty">${TEXT.loadFailed(error.message)}</div>`;
+        sectionTitleEl.textContent = 'Error';
+        return;
+      }
+
+      // 获取最近提交时间作为更新时间
+      try {
+        const commitsResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits?path=${PLUGIN_DIR_PATH}`);
+        const commits = await commitsResponse.json();
+        const latestCommitDate = commits[0]?.commit?.author?.date || commits[0]?.commit?.committer?.date;
+        if (latestCommitDate) {
+          const d = new Date(latestCommitDate);
+          updateTimeEl.textContent = d.toLocaleString('zh-CN', {
+            year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+          });
+        }
+      } catch {
+        updateTimeEl.textContent = TEXT.getFailed;
+      }
+
+      // =========================================
+      // 6. 渲染逻辑 (Rendering)
+      // =========================================
+      function render(filterCat = 'all', kw = '') {
+        const lowerKw = kw.toLowerCase();
+        
+        // 过滤数据
+        const filtered = plugins.filter(p => {
+          const hitCat = filterCat === 'all' || p.tags.includes(filterCat);
+          const hitKw = !lowerKw || p.name.toLowerCase().includes(lowerKw) || p.tags.some(tag => tag.toLowerCase().includes(lowerKw));
+          return hitCat && hitKw;
+        });
+
+        // 更新标题
+        const catText = tabsEl.querySelector(`[data-cat="${filterCat}"]`).textContent;
+        sectionTitleEl.textContent = TEXT.sectionTitle(catText, filtered.length);
+        listEl.innerHTML = '';
+
+        if (!filtered.length) {
+          listEl.innerHTML = `<div class="empty">${TEXT.noMatch}</div>`;
+          return;
+        }
+
+        // 生成卡片
+        filtered.forEach(p => {
+          const card = document.createElement('a');
+          card.className = 'card';
+          // 生成 Loon 导入链接
+          card.href = `loon://import?plugin=${encodeURIComponent(p.url)}`;
+          
+          const tagsHtml = p.tags.map(tag => `<span class="tag-item">${tag}</span>`).join(' ');
+          const descText = (p.desc === '暂无描述' || p.desc === 'No description available') ? TEXT.cardNoDesc : p.desc;
+
+          card.innerHTML = `
+            <div class="card-inner-layout">
+              ${p.icon ? `<img src="${p.icon}" class="card-icon" alt="${p.name} icon" loading="lazy">` : ''}
+              <div class="card-content">
+                <div class="card-header">
+                  <h3 class="card-title">${p.name}</h3>
+                </div>
+                <p class="card-update-time">${TEXT.cardUpdateTime}${p.date}</p>
+                <p class="card-desc">${descText}</p>
+                <div class="card-tags">${tagsHtml}</div>
+              </div>
+            </div>`;
+          listEl.appendChild(card);
+        });
+      };
+
+      // =========================================
+      // 4. 事件监听 (Event Listeners)
+      // =========================================
+      
+      // 菜单点击切换
+      menuToggle.addEventListener('click', e => {
+        e.stopPropagation();
+        secondaryMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+      });
+
+      // 点击菜单内部时关闭菜单（如果是链接）
+      secondaryMenu.addEventListener('click', e => {
+        if (e.target.closest('.menu-item')) {
+          secondaryMenu.classList.remove('active');
+          menuToggle.classList.remove('active');
+        }
+      });
+
+      // 点击外部关闭菜单
+      document.addEventListener('click', e => {
+        if (!secondaryMenu.contains(e.target) && !menuToggle.contains(e.target) && secondaryMenu.classList.contains('active')) {
+          secondaryMenu.classList.remove('active');
+          menuToggle.classList.remove('active');
+        }
+      });
+
+      // Tab 切换事件
+      tabsEl.addEventListener('click', e => {
+        if (e.target.matches('.tab')) {
+          tabsEl.querySelector('.active').classList.remove('active');
+          e.target.classList.add('active');
+          render(e.target.dataset.cat, searchEl.value);
+        }
+      });
+
+      // 搜索框输入事件
+      searchEl.addEventListener('input', () => {
+        render(tabsEl.querySelector('.tab.active').dataset.cat, searchEl.value);
+      });
+
+      // =========================================
+      // 7. 公告栏滚动动画逻辑 (Banner Animation)
+      // =========================================
+      (() => {
+        const bannerEl = document.getElementById('announcementBanner');
+        const bannerItems = bannerEl.querySelectorAll('.banner-item');
+        const totalBanners = bannerItems.length;
+        if (totalBanners <= 1) return;
+
+        let currentIndex = 0;
+        let bannerLoopAbort = null;
+
+        // 处理单条横幅的动画（如果文字过长则滚动，否则停留）
+        const handleBannerAnimation = async (item) => {
+          item.style.transition = 'none';
+          item.style.transform = 'translateX(0)';
+          await new Promise(r => setTimeout(r, 50));
+          
+          const containerWidth = item.clientWidth;
+          const textWidth = item.scrollWidth;
+
+          if (textWidth > containerWidth) {
+            // 文字超出，进行跑马灯滚动
+            await new Promise(r => setTimeout(r, 1000)); // 停留1秒
+            const offset = textWidth - containerWidth;
+            const speed = 60; // 滚动速度 px/s
+            const dur = offset / speed;
+            
+            item.style.transition = `transform ${dur}s linear`;
+            item.style.transform = `translateX(-${offset}px)`;
+            
+            // 等待滚动结束
+            await new Promise(r => { item.addEventListener('transitionend', r, { once: true }); });
+            await new Promise(r => setTimeout(r, 1000)); // 结束停留1秒
+          } else {
+            // 文字未超出，固定展示2.5秒
+            await new Promise(r => setTimeout(r, 2500));
+          }
+          
+          // 重置状态
+          item.style.transition = 'none';
+          item.style.transform = 'translateX(0)';
+        };
+
+        // 循环播放控制器
+        const startBannerLoop = async () => {
+          bannerLoopAbort?.abort();
+          bannerLoopAbort = new AbortController();
+          const signal = bannerLoopAbort.signal;
+
+          // 初始重置类名
+          bannerItems.forEach((item, index) => {
+            if (index !== currentIndex) item.classList.remove('active');
+          });
+          bannerItems[currentIndex].classList.add('active');
+
+          while (!signal.aborted) {
+            const item = bannerItems[currentIndex];
+            await handleBannerAnimation(item);
+            
+            if (signal.aborted) break;
+
+            // 切换到下一条
+            item.classList.remove('active');
+            currentIndex = (currentIndex + 1) % totalBanners;
+            bannerItems[currentIndex].classList.add('active');
+            
+            await new Promise(r => setTimeout(r, 600)); // 切换过渡时间
+          }
+        };
+
+        // 点击横幅手动切换下一条
+        bannerEl.addEventListener('click', () => {
+          if (!bannerLoopAbort) return;
+          bannerLoopAbort.abort();
+          currentIndex = (currentIndex + 1) % totalBanners;
+          startBannerLoop();
+        });
+
+        startBannerLoop();
+      })();
+
+      // 初始渲染
+      if (plugins.length > 0) render('all', '');
+    })();
+  </script>
+</body>
+</html>
