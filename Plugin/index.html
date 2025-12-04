@@ -19,13 +19,10 @@
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 
   <style>
-    /* =========================================
-       1. 全局变量定义 (CSS Variables)
-       ========================================= */
+    /* CSS 变量定义：颜色、尺寸与特效 */
     :root {
       --spacing-page-h: 1.5rem;
-      --header-inner-height: 62px; /* 纯内容高度，不含刘海 */
-
+      --header-inner-height: 62px;
       /* 浅色模式配色 */
       --bg-body: #F2F2F7;
       --bg-card: #FFFFFF;
@@ -45,7 +42,7 @@
       --glass-blur: blur(20px);
     }
 
-    /* 深色模式适配 */
+    /* 深色模式变量覆盖 */
     @media (prefers-color-scheme: dark) {
       :root {
         --bg-body: #000000;
@@ -64,10 +61,10 @@
       }
     }
 
-    /* =========================================
-       2. 基础重置 (Reset)
-       ========================================= */
-    *, *::before, *::after {
+    /* 基础样式重置 */
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -90,7 +87,9 @@
       overscroll-behavior-y: none;
     }
 
-    body::before, body::after {
+    /* 防止过度滚动显示背景色 */
+    body::before,
+    body::after {
       content: '';
       position: fixed;
       left: 0;
@@ -100,10 +99,17 @@
       pointer-events: none;
       background-color: var(--bg-body);
     }
-    body::before { bottom: 100%; }
-    body::after { top: 100%; }
 
-    input, button {
+    body::before {
+      bottom: 100%;
+    }
+
+    body::after {
+      top: 100%;
+    }
+
+    input,
+    button {
       font-family: inherit;
       border: none;
       outline: none;
@@ -112,25 +118,19 @@
       appearance: none;
     }
 
-    /* =========================================
-       3. 顶部导航栏 (Header) - 修复刘海遮挡问题
-       ========================================= */
+    /* 顶部导航栏样式 */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed; 
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      
-      /* 关键修改：高度包含 safe-area-inset-top */
       height: calc(var(--header-inner-height) + env(safe-area-inset-top));
-      /* 关键修改：增加顶部内边距，把内容顶下来 */
       padding-top: env(safe-area-inset-top);
       padding-left: calc(var(--spacing-page-h) + env(safe-area-inset-left));
       padding-right: calc(var(--spacing-page-h) + env(safe-area-inset-right));
-      
       z-index: 100;
       background: var(--bg-header);
       backdrop-filter: saturate(180%) var(--glass-blur);
@@ -147,7 +147,6 @@
     .header-title-block {
       position: absolute;
       left: 50%;
-      /* 关键修改：垂直居中时，要考虑到 safe-area 的偏移 */
       top: calc(50% + env(safe-area-inset-top) / 2);
       transform: translate(-50%, -50%);
       width: 100%;
@@ -168,9 +167,7 @@
       color: var(--text-secondary);
     }
 
-    /* =========================================
-       4. 菜单与交互 (Menu & Controls)
-       ========================================= */
+    /* 菜单按钮样式 */
     .menu-toggle {
       display: flex;
       flex-direction: column;
@@ -191,23 +188,37 @@
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    .menu-toggle span:nth-child(1) { width: 22px; }
-    .menu-toggle span:nth-child(2) { width: 16px; opacity: 1; }
-    .menu-toggle span:nth-child(3) { width: 22px; }
+    .menu-toggle span:nth-child(1) {
+      width: 22px;
+    }
 
+    .menu-toggle span:nth-child(2) {
+      width: 16px;
+      opacity: 1;
+    }
+
+    .menu-toggle span:nth-child(3) {
+      width: 22px;
+    }
+
+    /* 菜单激活状态动画 */
     .menu-toggle.active span:nth-child(1) {
       transform: translateY(7.5px) rotate(45deg);
       background-color: var(--text-primary);
     }
-    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
     .menu-toggle.active span:nth-child(3) {
       transform: translateY(-7.5px) rotate(-45deg);
       background-color: var(--text-primary);
     }
 
+    /* 下拉菜单容器样式 */
     .secondary-menu {
       position: absolute;
-      /* 菜单位置自动跟随 Header 高度变化 */
       top: calc(100% + 12px);
       right: calc(var(--spacing-page-h) + env(safe-area-inset-right));
       background: var(--bg-card);
@@ -232,6 +243,7 @@
       transform: scale(1) translateY(0);
     }
 
+    /* 菜单项样式 */
     .menu-item {
       display: flex;
       align-items: center;
@@ -257,6 +269,7 @@
       flex-grow: 1;
     }
 
+    /* 图标通用样式 */
     .icon {
       width: 22px;
       height: 22px;
@@ -268,30 +281,36 @@
       flex-shrink: 0;
     }
 
-    .icon-telegram { -webkit-mask-image: url('../Icon/PluginLab/Telegram.svg'); mask-image: url('../Icon/PluginLab/Telegram.svg'); }
-    .icon-github { -webkit-mask-image: url('../Icon/PluginLab/GitHub.svg'); mask-image: url('../Icon/PluginLab/GitHub.svg'); }
-    .icon-install { 
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E"); 
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E"); 
+    .icon-telegram {
+      -webkit-mask-image: url('../Icon/PluginLab/Telegram.svg');
+      mask-image: url('../Icon/PluginLab/Telegram.svg');
     }
 
-    #install-pwa { display: none; }
+    .icon-github {
+      -webkit-mask-image: url('../Icon/PluginLab/GitHub.svg');
+      mask-image: url('../Icon/PluginLab/GitHub.svg');
+    }
 
-    /* =========================================
-       5. 主体布局 (Main Content)
-       ========================================= */
+    .icon-install {
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E");
+    }
+
+    #install-pwa {
+      display: none;
+    }
+
+    /* 页面主体布局 */
     .wrap {
       max-width: 1100px;
       margin: 0 auto;
-      
       padding-left: calc(var(--spacing-page-h) + env(safe-area-inset-left));
       padding-right: calc(var(--spacing-page-h) + env(safe-area-inset-right));
-      
-      /* 关键修改：Padding Top 要加上 Header 的高度(含刘海) */
       padding-top: calc(var(--header-inner-height) + env(safe-area-inset-top) + 1.5rem);
       padding-bottom: calc(3rem + env(safe-area-inset-bottom));
     }
 
+    /* 公告栏样式 */
     .announcement-banner {
       background-color: #fff9de;
       border: 1px solid #e1e4e8;
@@ -330,10 +349,21 @@
       transform: translateX(0);
     }
 
-    @media (prefers-color-scheme: dark) { .banner-item { color: #e2e2e2; } }
-    .banner-item.active { opacity: 1; z-index: 1; }
+    @media (prefers-color-scheme: dark) {
+      .banner-item {
+        color: #e2e2e2;
+      }
+    }
 
-    .search-box { margin-bottom: 2rem; }
+    .banner-item.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* 搜索框与标签样式 */
+    .search-box {
+      margin-bottom: 2rem;
+    }
 
     #search {
       width: 100%;
@@ -344,6 +374,7 @@
       color: var(--text-primary);
       transition: all 0.2s;
     }
+
     #search:focus {
       background: var(--bg-card);
       box-shadow: 0 0 0 2px var(--color-accent), var(--shadow-sm);
@@ -387,9 +418,7 @@
       color: var(--text-primary);
     }
 
-    /* =========================================
-       6. 插件卡片列表
-       ========================================= */
+    /* 插件列表与卡片样式 */
     .list {
       display: grid;
       gap: 1.5rem;
@@ -418,9 +447,17 @@
       -webkit-backdrop-filter: saturate(180%) blur(10px);
       z-index: 10;
     }
-    .card:active { transform: scale(0.97); transition-duration: 0.1s; }
 
-    .card-inner-layout { display: flex; align-items: flex-start; gap: 1rem; }
+    .card:active {
+      transform: scale(0.97);
+      transition-duration: 0.1s;
+    }
+
+    .card-inner-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
 
     .card-icon {
       width: 52px;
@@ -431,10 +468,27 @@
       background: #f1f1f1;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
     }
-    @media (prefers-color-scheme: dark) { .card-icon { background: #333; } }
 
-    .card-content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    @media (prefers-color-scheme: dark) {
+      .card-icon {
+        background: #333;
+      }
+    }
+
+    .card-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
     .card-title {
       font-size: 1.15rem;
       font-weight: 600;
@@ -443,12 +497,14 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .card-update-time {
       margin: 0 0 0.6rem;
       font-size: 0.75rem;
       color: var(--text-tertiary);
       font-weight: 500;
     }
+
     .card-desc {
       font-size: 0.9rem;
       color: var(--text-secondary);
@@ -458,6 +514,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
     .card-tags {
       margin-top: auto;
       padding-top: 1rem;
@@ -465,6 +522,7 @@
       flex-wrap: wrap;
       gap: 0.5rem;
     }
+
     .tag-item {
       padding: 4px 10px;
       font-size: 0.75rem;
@@ -473,8 +531,12 @@
       background: rgba(0, 122, 255, 0.1);
       border-radius: 100px;
     }
+
     @media (prefers-color-scheme: dark) {
-      .tag-item { background: rgba(10, 132, 255, 0.2); color: #66b2ff; }
+      .tag-item {
+        background: rgba(10, 132, 255, 0.2);
+        color: #66b2ff;
+      }
     }
 
     .empty {
@@ -484,6 +546,7 @@
       grid-column: 1 / -1;
     }
 
+    /* 底部版权样式 */
     footer {
       text-align: center;
       font-size: 0.85rem;
@@ -493,12 +556,25 @@
       line-height: 1.8;
     }
 
-    /* 桌面端适配 */
+    /* 桌面端大屏适配 */
     @media (min-width: 768px) {
-      :root { --spacing-page-h: 2rem; }
-      header { padding-left: 2rem; padding-right: 2rem; }
-      .header-title-block { top: 50%; /* 桌面端没有刘海，恢复居中 */ }
-      header h1 { font-size: 1.4rem; }
+      :root {
+        --spacing-page-h: 2rem;
+      }
+
+      header {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .header-title-block {
+        top: 50%;
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+      }
+
       .secondary-menu {
         display: flex !important;
         visibility: visible !important;
@@ -514,16 +590,45 @@
         align-items: center;
         gap: 0.3rem;
       }
-      .menu-toggle { display: none; }
-      .menu-item { width: auto; padding: 8px; border-radius: 50%; gap: 2px; }
-      .menu-item:hover { background-color: rgba(0, 0, 0, 0.05); }
-      @media (prefers-color-scheme: dark) {
-        .menu-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+      .menu-toggle {
+        display: none;
       }
-      .menu-item-content span:not(.icon) { display: none; }
-      .menu-item-content { gap: 0; }
-      #install-pwa { display: none !important; }
-      .wrap { padding-left: 2rem; padding-right: 2rem; padding-top: calc(var(--header-inner-height) + 2rem); }
+
+      .menu-item {
+        width: auto;
+        padding: 8px;
+        border-radius: 50%;
+        gap: 2px;
+      }
+
+      .menu-item:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .menu-item:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      .menu-item-content span:not(.icon) {
+        display: none;
+      }
+
+      .menu-item-content {
+        gap: 0;
+      }
+
+      #install-pwa {
+        display: none !important;
+      }
+
+      .wrap {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: calc(var(--header-inner-height) + 2rem);
+      }
     }
   </style>
 </head>
@@ -550,7 +655,7 @@
             <span>安装应用</span>
           </div>
         </div>
-        
+
         <a href="https://t.me/BoEchoBot" target="_blank" class="menu-item" aria-label="Telegram" title="Telegram">
           <div class="menu-item-content">
             <span class="icon icon-telegram"></span>
@@ -582,7 +687,7 @@
     </div>
 
     <div class="section-title" id="sectionTitle">正在加载…</div>
-    
+
     <div class="list" id="list">
       <div class="empty">正在从 GitHub 加载插件列表，请稍候…</div>
     </div>
@@ -594,9 +699,12 @@
   </div>
 
   <script>
-    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+    /* 防止浏览器自动恢复滚动位置 */
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
     (async () => {
-      // 1. PWA Registration
+      /* PWA Service Worker 注册与安装逻辑 */
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW fail:', err));
@@ -605,7 +713,7 @@
 
       let deferredPrompt;
       const installBtn = document.getElementById('install-pwa');
-      
+
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
@@ -615,13 +723,15 @@
       installBtn.addEventListener('click', async () => {
         if (!deferredPrompt) return;
         deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
+        const {
+          outcome
+        } = await deferredPrompt.userChoice;
         console.log(`Install: ${outcome}`);
         deferredPrompt = null;
         installBtn.style.display = 'none';
       });
 
-      // 2. Logic
+      /* 配置文本常量 */
       const TEXT = {
         repoTitle: 'Loon 插件仓库',
         repoDesc: '点击插件卡片即可跳转安装插件',
@@ -648,6 +758,7 @@
         loading: '正在加载…'
       };
 
+      /* 获取 DOM 元素 */
       const menuToggle = document.getElementById('menu-toggle');
       const secondaryMenu = document.getElementById('secondary-menu');
       const listEl = document.getElementById('list');
@@ -656,6 +767,7 @@
       const sectionTitleEl = document.getElementById('sectionTitle');
       const updateTimeEl = document.getElementById('updateTime');
 
+      /* 初始化公告栏 */
       const bannerContainer = document.getElementById('announcementBanner');
       const bannerMessages = [TEXT.bannerWarning, TEXT.bannerDisclaimer, TEXT.bannerUpdateNotice];
       bannerMessages.forEach((message, index) => {
@@ -666,15 +778,16 @@
         bannerContainer.appendChild(p);
       });
 
+      /* 初始化页面文本 */
       document.querySelector('h1').textContent = TEXT.repoTitle;
       document.querySelector('header p').textContent = TEXT.repoDesc;
       searchEl.placeholder = TEXT.searchPlaceholder;
-      
+
       document.querySelectorAll('.tab').forEach(btn => {
         const cat = btn.dataset.cat;
         btn.textContent = TEXT[`cat${cat === 'all' ? 'All' : cat === '去广告' ? 'Adblock' : cat === '功能增强' ? 'Enhance' : cat === '解锁会员' ? 'Unlock' : 'Cron'}`];
       });
-      
+
       document.querySelector('footer span').textContent = TEXT.updateTimeLabel;
       document.querySelector('#list .empty').textContent = TEXT.loadingPlugins;
       sectionTitleEl.textContent = TEXT.loading;
@@ -684,10 +797,11 @@
       const GITHUB_REPO = 'sooyaaabo/Loon';
       const PLUGIN_DIR_PATH = 'Plugin';
 
+      /* 从 GitHub API 获取插件文件列表并解析内容 */
       try {
         const allFilesResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${PLUGIN_DIR_PATH}`);
         const allFiles = await allFilesResponse.json();
-        
+
         if (!Array.isArray(allFiles)) throw new Error('无效的 GitHub API 响应。');
         const pluginFiles = allFiles.filter(file => file.name.toLowerCase().endsWith('.lpx'));
         if (pluginFiles.length === 0) throw new Error(TEXT.noPluginsFound);
@@ -704,7 +818,14 @@
           const date = (text.match(/#!\s*date\s*=\s*(.+)/i) || [])[1]?.trim() || 'Unknown';
           const tagStr = (text.match(/#!\s*tag\s*=\s*(.+)/i) || [])[1]?.trim();
           const tags = tagStr ? tagStr.split(',').map(t => t.trim()).filter(Boolean) : [];
-          return { url: file.download_url, name, desc, icon, date, tags };
+          return {
+            url: file.download_url,
+            name,
+            desc,
+            icon,
+            date,
+            tags
+          };
         });
       } catch (error) {
         listEl.innerHTML = `<div class="empty">${TEXT.loadFailed(error.message)}</div>`;
@@ -712,6 +833,7 @@
         return;
       }
 
+      /* 获取仓库最近提交时间 */
       try {
         const commitsResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits?path=${PLUGIN_DIR_PATH}`);
         const commits = await commitsResponse.json();
@@ -719,13 +841,18 @@
         if (latestCommitDate) {
           const d = new Date(latestCommitDate);
           updateTimeEl.textContent = d.toLocaleString('zh-CN', {
-            year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
           });
         }
       } catch {
         updateTimeEl.textContent = TEXT.getFailed;
       }
 
+      /* 渲染插件列表 */
       function render(filterCat = 'all', kw = '') {
         const lowerKw = kw.toLowerCase();
         const filtered = plugins.filter(p => {
@@ -763,6 +890,7 @@
         });
       };
 
+      /* 绑定交互事件监听器 */
       menuToggle.addEventListener('click', e => {
         e.stopPropagation();
         secondaryMenu.classList.toggle('active');
@@ -796,6 +924,7 @@
         render(tabsEl.querySelector('.tab.active').dataset.cat, searchEl.value);
       });
 
+      /* 公告栏滚动动画逻辑 */
       (() => {
         const bannerEl = document.getElementById('announcementBanner');
         const bannerItems = bannerEl.querySelectorAll('.banner-item');
@@ -818,7 +947,11 @@
             const dur = offset / speed;
             item.style.transition = `transform ${dur}s linear`;
             item.style.transform = `translateX(-${offset}px)`;
-            await new Promise(r => { item.addEventListener('transitionend', r, { once: true }); });
+            await new Promise(r => {
+              item.addEventListener('transitionend', r, {
+                once: true
+              });
+            });
             await new Promise(r => setTimeout(r, 1000));
           } else {
             await new Promise(r => setTimeout(r, 2500));
@@ -856,8 +989,10 @@
         startBannerLoop();
       })();
 
+      /* 初始化渲染 */
       if (plugins.length > 0) render('all', '');
     })();
   </script>
 </body>
+
 </html>
