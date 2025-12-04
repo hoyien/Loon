@@ -1,74 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Loon 插件仓库</title>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Loon 插件仓库">
-  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Loon 插件仓库" />
+  <meta name="format-detection" content="telephone=no" />
 
-  <link rel="icon" href="../Icon/PluginLab/LoonPluginLab.png" type="image/png">
-  <link rel="apple-touch-icon" href="../Icon/PluginLab/LoonPluginLab-White.png">
+  <link rel="icon" href="../Icon/PluginLab/LoonPluginLab.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../Icon/PluginLab/LoonPluginLab-White.png" />
 
-  <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
 
   <style>
-    /* =========================================
-       1. 全局变量定义 (CSS Variables)
-       ========================================= */
-    :root {
-      /* 安全区域适配 */
-      --safe-top: env(safe-area-inset-top);
-      --safe-bottom: env(safe-area-inset-bottom);
-      --safe-left: env(safe-area-inset-left);
-      --safe-right: env(safe-area-inset-right);
-
-      /* 浅色模式配色 */
-      --bg-body: #F2F2F7;
-      --bg-card: #FFFFFF;
-      --bg-card-hover: rgba(255, 255, 255, 0.65);
-      --bg-input: #E3E3E8;
-      --bg-header: rgba(242, 242, 247, 0.85);
-      --text-primary: #1c1c1e;
-      --text-secondary: #8e8e93;
-      --text-tertiary: #aeaeb2;
-      --color-accent: #007aff;
-      --border-light: rgba(0, 0, 0, 0.05);
-      --border-separator: #c6c6c8;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.08);
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --glass-blur: blur(20px);
-    }
-
-    /* 深色模式适配 */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-body: #000000;
-        --bg-card: #1C1C1E;
-        --bg-card-hover: rgba(44, 44, 46, 0.75);
-        --bg-input: #2C2C2E;
-        --bg-header: rgba(0, 0, 0, 0.85);
-        --text-primary: #f2f2f7;
-        --text-secondary: #8e8e93;
-        --text-tertiary: #636366;
-        --color-accent: #0a84ff;
-        --border-light: rgba(255, 255, 255, 0.1);
-        --border-separator: #38383a;
-        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-        --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.4);
-      }
-    }
-
-    /* =========================================
-       2. 基础重置 (Reset)
-       ========================================= */
     *,
     *::before,
     *::after {
@@ -76,102 +24,96 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+
+    :root {
+      --bg-body: #F2F2F7;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #FAFAFA;
+      --bg-header: #F2F2F7;
+      --text-primary: #1C1C1E;
+      --text-secondary: #8E8E93;
+      --text-tertiary: #AEAEB2;
+      --color-accent: #007AFF;
+      --border-separator: #C6C6C8;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-body: #000000;
+        --bg-card: #1C1C1E;
+        --bg-card-hover: #2C2C2E;
+        --bg-header: #000000;
+        --text-primary: #F2F2F7;
+        --text-secondary: #8E8E93;
+        --text-tertiary: #636366;
+        --color-accent: #0A84FF;
+        --border-separator: #38383A;
+      }
     }
 
     html {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", Roboto, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -webkit-text-size-adjust: 100%;
-      background-color: var(--bg-body);
-      color: var(--text-primary);
+      scroll-behavior: smooth;
+      overscroll-behavior-y: none;
+      -webkit-overflow-scrolling: touch;
     }
 
     body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-primary);
       line-height: 1.5;
       min-height: 100vh;
+      margin: 0;
+      padding: 0;
       position: relative;
-      z-index: 1;
-      overscroll-behavior-y: none;
-    }
-
-    /* 修复 Safari 下的橡皮筋回弹背景色 */
-    body::before,
-    body::after {
-      content: '';
-      position: fixed;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      z-index: -999;
-      pointer-events: none;
-      background-color: var(--bg-body);
-    }
-
-    body::before {
-      bottom: 100%;
-    }
-
-    body::after {
-      top: 100%;
-    }
-
-    input,
-    button {
-      font-family: inherit;
-      border: none;
-      outline: none;
-      background: transparent;
-      -webkit-appearance: none;
-      appearance: none;
+      overflow-x: hidden;
     }
 
     /* =========================================
-       3. 顶部导航栏 (Header)
+       顶部导航栏（固定高度 64px）
        ========================================= */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed; 
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-    
-      /* 保持原有的内边距逻辑，确保刘海屏适配 */
-      padding-top: calc(0.8rem + var(--safe-top));
-      padding-bottom: 0.8rem;
-      padding-left: calc(1.5rem + var(--safe-left));
-      padding-right: calc(1.5rem + var(--safe-right));
-    
-      z-index: 100;
+      right: 0;
+      height: 64px;
+      z-index: 1000;
       background: var(--bg-header);
-      backdrop-filter: saturate(180%) var(--glass-blur);
-      -webkit-backdrop-filter: saturate(180%) var(--glass-blur);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 0.5px solid var(--border-separator);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .header-logo img {
       height: 36px;
-      display: block;
       border-radius: 8px;
     }
 
-    /* 标题居中绝对定位 */
     .header-title-block {
       position: absolute;
       left: 50%;
-      top: calc(50% + (var(--safe-top) / 2));
+      top: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      padding: 0 100px;
       text-align: center;
       pointer-events: none;
+      width: calc(100% - 200px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     header h1 {
       font-size: 1.1rem;
       font-weight: 600;
-      color: var(--text-primary);
     }
 
     header p {
@@ -180,10 +122,7 @@
       color: var(--text-secondary);
     }
 
-    /* =========================================
-       4. 菜单与交互 (Menu & Controls)
-       ========================================= */
-    /* 汉堡菜单按钮 */
+    /* 菜单按钮 */
     .menu-toggle {
       display: flex;
       flex-direction: column;
@@ -193,7 +132,7 @@
       height: 32px;
       cursor: pointer;
       gap: 5px;
-      z-index: 102;
+      z-index: 1001;
     }
 
     .menu-toggle span {
@@ -201,14 +140,13 @@
       height: 2.5px;
       background-color: var(--color-accent);
       border-radius: 4px;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all 0.3s;
     }
 
     .menu-toggle span:nth-child(1) { width: 22px; }
-    .menu-toggle span:nth-child(2) { width: 16px; opacity: 1; }
+    .menu-toggle span:nth-child(2) { width: 16px; }
     .menu-toggle span:nth-child(3) { width: 22px; }
 
-    /* 汉堡菜单激活态动画 */
     .menu-toggle.active span:nth-child(1) {
       transform: translateY(7.5px) rotate(45deg);
       background-color: var(--text-primary);
@@ -219,19 +157,19 @@
       background-color: var(--text-primary);
     }
 
-    /* 二级弹出菜单 */
+    /* 二级菜单 */
     .secondary-menu {
       position: absolute;
       top: calc(100% + 12px);
       right: 1.5rem;
       background: var(--bg-card);
       border-radius: 14px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       padding: 0.5rem;
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
-      z-index: 101;
+      z-index: 1001;
       min-width: 180px;
       visibility: hidden;
       opacity: 0;
@@ -259,26 +197,21 @@
       transition: background-color 0.2s;
     }
 
-    .menu-item:hover {
+    .menu-item:hover, .menu-item:focus {
       background-color: var(--bg-body);
+      outline: none;
     }
 
-    .menu-item-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-grow: 1;
-    }
-
-    /* 图标遮罩处理 (SVG Mask) */
     .icon {
       width: 22px;
       height: 22px;
       background-color: var(--color-accent);
+      -webkit-mask-size: contain;
+      mask-size: contain;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
-      -webkit-mask-size: 100% 100%;
-      mask-size: 100% 100%;
+      -webkit-mask-position: center;
+      mask-position: center;
       flex-shrink: 0;
     }
 
@@ -293,21 +226,20 @@
     }
 
     /* =========================================
-       5. 主体布局 (Main Content)
+       主体内容区域
        ========================================= */
     .wrap {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 1.5rem;
-      padding-top: calc(66px + var(--safe-top) + 1.5rem);
-      padding-left: calc(1.5rem + var(--safe-left));
-      padding-right: calc(1.5rem + var(--safe-right));
-      padding-bottom: calc(2rem + var(--safe-bottom));
+      padding: 0 1.5rem;
+      padding-top: calc(64px + 1.5rem); /* 64px = header 高度 */
+      padding-bottom: 2.5rem;
     }
 
     /* 公告横幅 */
     .announcement-banner {
       background-color: #fff9de;
+      color: #1d1d1f;
       border: 1px solid #e1e4e8;
       border-radius: var(--radius-lg);
       margin-bottom: 1rem;
@@ -315,11 +247,13 @@
       min-height: 3.2rem;
       cursor: pointer;
       overflow: hidden;
+      padding: 0;
     }
 
     @media (prefers-color-scheme: dark) {
       .announcement-banner {
         background-color: #3a372d;
+        color: #e2e2e2;
         border-color: #444;
       }
     }
@@ -332,10 +266,8 @@
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      padding: .5rem 1rem;
-      color: #1d1d1f;
-      font-size: .9rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
       font-weight: 500;
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
@@ -344,18 +276,12 @@
       transform: translateX(0);
     }
 
-    @media (prefers-color-scheme: dark) {
-      .banner-item {
-        color: #e2e2e2;
-      }
-    }
-
     .banner-item.active {
       opacity: 1;
       z-index: 1;
     }
 
-    /* 搜索框与标签 */
+    /* 搜索与标签 */
     .search-box {
       margin-bottom: 2rem;
     }
@@ -365,14 +291,15 @@
       padding: 12px 18px;
       font-size: 1.05rem;
       border-radius: var(--radius-md);
-      background: var(--bg-input);
+      background: var(--bg-card);
       color: var(--text-primary);
+      border: 1px solid var(--border-separator);
       transition: all 0.2s;
     }
 
     #search:focus {
-      background: var(--bg-card);
-      box-shadow: 0 0 0 2px var(--color-accent), var(--shadow-sm);
+      outline: 2px solid var(--color-accent);
+      box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
     }
 
     .tabs {
@@ -391,17 +318,19 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
-      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-separator);
     }
 
-    .tabs button:hover {
+    .tabs button:hover, .tabs button:focus {
       color: var(--text-primary);
       transform: translateY(-1px);
+      outline: none;
     }
 
     .tabs button.active {
       background: var(--color-accent);
-      color: #fff;
+      color: white;
+      border-color: var(--color-accent);
       box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
       transform: scale(1.02);
     }
@@ -409,13 +338,11 @@
     .section-title {
       font-size: 1.4rem;
       font-weight: 700;
-      margin: 2rem 0 1rem 0.2rem;
+      margin: 2rem 0 1rem;
       color: var(--text-primary);
     }
 
-    /* =========================================
-       6. 插件卡片列表 (Card List)
-       ========================================= */
+    /* 插件列表 */
     .list {
       display: grid;
       gap: 1.5rem;
@@ -428,25 +355,22 @@
       padding: 1.2rem;
       text-decoration: none;
       color: inherit;
-      position: relative;
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
       overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
 
     .card:hover {
-      transform: translateY(-6px) scale(1.005);
-      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       background-color: var(--bg-card-hover);
-      backdrop-filter: saturate(180%) blur(10px);
-      -webkit-backdrop-filter: saturate(180%) blur(10px);
-      z-index: 10;
     }
 
     .card:active {
-      transform: scale(0.97);
+      transform: translateY(0) scale(0.98);
       transition-duration: 0.1s;
     }
 
@@ -462,14 +386,12 @@
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
-      background: #f1f1f1;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .card-icon {
-        background: #333;
-      }
+      background: var(--bg-body);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--text-secondary);
     }
 
     .card-content {
@@ -477,13 +399,6 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
     }
 
     .card-title {
@@ -496,10 +411,9 @@
     }
 
     .card-update-time {
-      margin: 0 0 0.6rem;
       font-size: 0.75rem;
       color: var(--text-tertiary);
-      font-weight: 500;
+      margin: 0.2rem 0 0.6rem;
     }
 
     .card-desc {
@@ -510,6 +424,7 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      flex-grow: 1;
     }
 
     .card-tags {
@@ -541,84 +456,86 @@
       color: var(--text-tertiary);
       padding: 4rem 1rem;
       grid-column: 1 / -1;
+      font-size: 0.95rem;
     }
 
     /* =========================================
-       7. 底部 (Footer)
+       底部
        ========================================= */
     footer {
       text-align: center;
       font-size: 0.85rem;
       color: var(--text-tertiary);
       margin-top: 2rem;
-      padding-bottom: calc(1rem + var(--safe-bottom));
       line-height: 1.8;
     }
 
     /* =========================================
-       8. 桌面端适配 (Desktop Query)
+       桌面端优化（768px+）
        ========================================= */
     @media (min-width: 768px) {
       header {
-        padding: 1rem 2rem;
-      }
-      
-      .header-title-block {
-        top: 50%;
-      }
-      
-      header h1 {
-        font-size: 1.4rem;
+        padding: 0 2rem;
       }
 
-      /* 桌面端将弹出菜单改为平铺显示 */
-      .secondary-menu {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-        position: static;
-        flex-direction: row;
-        background: none;
-        box-shadow: none;
-        padding: 0;
-        min-width: auto;
-        align-items: center;
-        gap: 0.3rem;
+      .header-title-block {
+        width: calc(100% - 300px);
+      }
+
+      header h1 {
+        font-size: 1.4rem;
       }
 
       .menu-toggle {
         display: none;
       }
 
+      .secondary-menu {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+        position: static;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        gap: 0.5rem;
+        align-items: center;
+        min-width: auto;
+      }
+
       .menu-item {
-        width: auto;
         padding: 8px;
         border-radius: 50%;
-        gap: 2px;
-      }
-
-      .menu-item:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .menu-item:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-        }
+        width: auto;
       }
 
       .menu-item-content span:not(.icon) {
         display: none;
       }
-      
+
       .menu-item-content {
         gap: 0;
       }
 
       .wrap {
         padding: 2rem;
+        padding-top: calc(64px + 2rem);
+      }
+
+      .card:hover {
+        transform: translateY(-6px) scale(1.01);
+      }
+    }
+
+    @media (max-width: 360px) {
+      .card-icon {
+        width: 44px;
+        height: 44px;
+      }
+
+      .card-title {
+        font-size: 1.05rem;
       }
     }
   </style>
@@ -628,7 +545,7 @@
   <header>
     <div class="header-logo">
       <a href="" title="刷新页面" aria-label="刷新页面">
-        <img src="../Icon/PluginLab/LoonPluginLab.png" alt="Loon Plugin Lab Logo">
+        <img src="../Icon/PluginLab/LoonPluginLab.png" alt="Loon Plugin Lab Logo" />
       </a>
     </div>
     <div class="header-title-block">
@@ -660,7 +577,7 @@
     <div class="announcement-banner" id="announcementBanner"></div>
 
     <div class="search-box">
-      <input id="search" placeholder="搜索插件名称或标签…">
+      <input id="search" placeholder="搜索插件名称或标签…" />
       <div class="tabs">
         <button class="tab active" data-cat="all">全部</button>
         <button class="tab" data-cat="去广告">去广告</button>
@@ -671,13 +588,13 @@
     </div>
 
     <div class="section-title" id="sectionTitle">正在加载…</div>
-    
+
     <div class="list" id="list">
       <div class="empty">正在从 GitHub 加载插件列表，请稍候…</div>
     </div>
 
     <footer>
-      <span>更新时间</span>：<span id="updateTime">--</span><br>
+      <span>更新时间</span>：<span id="updateTime">--</span><br />
       Copyright &copy; <span id="copyright-year">2025</span> sooyaaabo. All rights reserved.
     </footer>
   </div>
@@ -686,10 +603,8 @@
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
+
     (async () => {
-      // =========================================
-      // 1. 配置与常量 (Configuration)
-      // =========================================
       const TEXT = {
         repoTitle: 'Loon 插件仓库',
         repoDesc: '点击插件卡片即可跳转安装插件',
@@ -716,9 +631,6 @@
         loading: '正在加载…'
       };
 
-      // =========================================
-      // 2. DOM 元素获取 (DOM Selection)
-      // =========================================
       const menuToggle = document.getElementById('menu-toggle');
       const secondaryMenu = document.getElementById('secondary-menu');
       const listEl = document.getElementById('list');
@@ -727,72 +639,56 @@
       const sectionTitleEl = document.getElementById('sectionTitle');
       const updateTimeEl = document.getElementById('updateTime');
 
-      // =========================================
-      // 3. 初始化 UI (UI Initialization)
-      // =========================================
-      
-      // 初始化横幅公告内容
       const bannerContainer = document.getElementById('announcementBanner');
       const bannerMessages = [TEXT.bannerWarning, TEXT.bannerDisclaimer, TEXT.bannerUpdateNotice];
       bannerMessages.forEach((message, index) => {
         const p = document.createElement('p');
         p.className = 'banner-item';
-        if (index === 0) p.classList.add('active'); // 默认显示第一条
+        if (index === 0) p.classList.add('active');
         p.textContent = message;
         bannerContainer.appendChild(p);
       });
 
-      // 设置静态文本内容
       document.querySelector('h1').textContent = TEXT.repoTitle;
       document.querySelector('header p').textContent = TEXT.repoDesc;
       searchEl.placeholder = TEXT.searchPlaceholder;
-      
-      // 设置 Tab 按钮文本
+
       document.querySelectorAll('.tab').forEach(btn => {
         const cat = btn.dataset.cat;
         btn.textContent = TEXT[`cat${cat === 'all' ? 'All' : cat === '去广告' ? 'Adblock' : cat === '功能增强' ? 'Enhance' : cat === '解锁会员' ? 'Unlock' : 'Cron'}`];
       });
-      
+
       document.querySelector('footer span').textContent = TEXT.updateTimeLabel;
       document.querySelector('#list .empty').textContent = TEXT.loadingPlugins;
       sectionTitleEl.textContent = TEXT.loading;
       document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
-      // =========================================
-      // 5. 数据获取与处理 (Data Fetching & Processing)
-      // =========================================
       let plugins = [];
-
       const GITHUB_REPO = 'sooyaaabo/Loon';
       const PLUGIN_DIR_PATH = 'Plugin';
 
       try {
-        // 请求 GitHub API 获取文件列表
         const allFilesResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${PLUGIN_DIR_PATH}`);
         const allFiles = await allFilesResponse.json();
-        
+
         if (!Array.isArray(allFiles)) throw new Error('无效的 GitHub API 响应。');
 
-        // 筛选出 .lpx 后缀的文件
         const pluginFiles = allFiles.filter(file => file.name.toLowerCase().endsWith('.lpx'));
         if (pluginFiles.length === 0) throw new Error(TEXT.noPluginsFound);
 
-        // 并发获取所有插件文件的内容
         const pluginContents = await Promise.all(
           pluginFiles.map(file => fetch(file.download_url).then(res => res.text()))
         );
 
-        // 解析文件内容提取元数据
         plugins = pluginContents.map((text, i) => {
           const file = pluginFiles[i];
-          // 正则匹配 #!name, #!desc 等配置项
           const name = (text.match(/#!\s*name\s*=\s*(.+)/i) || [])[1]?.trim() || file.name;
           const desc = (text.match(/#!\s*desc\s*=\s*(.+)/i) || [])[1]?.trim() || 'No description available';
           const icon = (text.match(/#!\s*icon\s*=\s*(.+)/i) || [])[1]?.trim() || '';
           const date = (text.match(/#!\s*date\s*=\s*(.+)/i) || [])[1]?.trim() || 'Unknown';
           const tagStr = (text.match(/#!\s*tag\s*=\s*(.+)/i) || [])[1]?.trim();
           const tags = tagStr ? tagStr.split(',').map(t => t.trim()).filter(Boolean) : [];
-          
+
           return { url: file.download_url, name, desc, icon, date, tags };
         });
       } catch (error) {
@@ -801,7 +697,6 @@
         return;
       }
 
-      // 获取最近提交时间作为更新时间
       try {
         const commitsResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits?path=${PLUGIN_DIR_PATH}`);
         const commits = await commitsResponse.json();
@@ -816,20 +711,14 @@
         updateTimeEl.textContent = TEXT.getFailed;
       }
 
-      // =========================================
-      // 6. 渲染逻辑 (Rendering)
-      // =========================================
       function render(filterCat = 'all', kw = '') {
         const lowerKw = kw.toLowerCase();
-        
-        // 过滤数据
         const filtered = plugins.filter(p => {
           const hitCat = filterCat === 'all' || p.tags.includes(filterCat);
           const hitKw = !lowerKw || p.name.toLowerCase().includes(lowerKw) || p.tags.some(tag => tag.toLowerCase().includes(lowerKw));
           return hitCat && hitKw;
         });
 
-        // 更新标题
         const catText = tabsEl.querySelector(`[data-cat="${filterCat}"]`).textContent;
         sectionTitleEl.textContent = TEXT.sectionTitle(catText, filtered.length);
         listEl.innerHTML = '';
@@ -839,13 +728,11 @@
           return;
         }
 
-        // 生成卡片
         filtered.forEach(p => {
           const card = document.createElement('a');
           card.className = 'card';
-          // 生成 Loon 导入链接
           card.href = `loon://import?plugin=${encodeURIComponent(p.url)}`;
-          
+
           const tagsHtml = p.tags.map(tag => `<span class="tag-item">${tag}</span>`).join(' ');
           const descText = (p.desc === '暂无描述' || p.desc === 'No description available') ? TEXT.cardNoDesc : p.desc;
 
@@ -863,20 +750,14 @@
             </div>`;
           listEl.appendChild(card);
         });
-      };
+      }
 
-      // =========================================
-      // 4. 事件监听 (Event Listeners)
-      // =========================================
-      
-      // 菜单点击切换
       menuToggle.addEventListener('click', e => {
         e.stopPropagation();
         secondaryMenu.classList.toggle('active');
         menuToggle.classList.toggle('active');
       });
 
-      // 点击菜单内部时关闭菜单（如果是链接）
       secondaryMenu.addEventListener('click', e => {
         if (e.target.closest('.menu-item')) {
           secondaryMenu.classList.remove('active');
@@ -884,7 +765,6 @@
         }
       });
 
-      // 点击外部关闭菜单
       document.addEventListener('click', e => {
         if (!secondaryMenu.contains(e.target) && !menuToggle.contains(e.target) && secondaryMenu.classList.contains('active')) {
           secondaryMenu.classList.remove('active');
@@ -892,7 +772,6 @@
         }
       });
 
-      // Tab 切换事件
       tabsEl.addEventListener('click', e => {
         if (e.target.matches('.tab')) {
           tabsEl.querySelector('.active').classList.remove('active');
@@ -901,14 +780,10 @@
         }
       });
 
-      // 搜索框输入事件
       searchEl.addEventListener('input', () => {
         render(tabsEl.querySelector('.tab.active').dataset.cat, searchEl.value);
       });
 
-      // =========================================
-      // 7. 公告栏滚动动画逻辑 (Banner Animation)
-      // =========================================
       (() => {
         const bannerEl = document.getElementById('announcementBanner');
         const bannerItems = bannerEl.querySelectorAll('.banner-item');
@@ -916,79 +791,61 @@
         if (totalBanners <= 1) return;
 
         let currentIndex = 0;
-        let bannerLoopAbort = null;
+        let abortController = null;
 
-        // 处理单条横幅的动画（如果文字过长则滚动，否则停留）
         const handleBannerAnimation = async (item) => {
           item.style.transition = 'none';
           item.style.transform = 'translateX(0)';
           await new Promise(r => setTimeout(r, 50));
-          
+
           const containerWidth = item.clientWidth;
           const textWidth = item.scrollWidth;
 
           if (textWidth > containerWidth) {
-            // 文字超出，进行跑马灯滚动
-            await new Promise(r => setTimeout(r, 1000)); // 停留1秒
+            await new Promise(r => setTimeout(r, 1000));
             const offset = textWidth - containerWidth;
-            const speed = 60; // 滚动速度 px/s
+            const speed = 60;
             const dur = offset / speed;
-            
             item.style.transition = `transform ${dur}s linear`;
             item.style.transform = `translateX(-${offset}px)`;
-            
-            // 等待滚动结束
             await new Promise(r => { item.addEventListener('transitionend', r, { once: true }); });
-            await new Promise(r => setTimeout(r, 1000)); // 结束停留1秒
+            await new Promise(r => setTimeout(r, 1000));
           } else {
-            // 文字未超出，固定展示2.5秒
             await new Promise(r => setTimeout(r, 2500));
           }
-          
-          // 重置状态
+
           item.style.transition = 'none';
           item.style.transform = 'translateX(0)';
         };
 
-        // 循环播放控制器
-        const startBannerLoop = async () => {
-          bannerLoopAbort?.abort();
-          bannerLoopAbort = new AbortController();
-          const signal = bannerLoopAbort.signal;
+        const startLoop = async () => {
+          abortController?.abort();
+          abortController = new AbortController();
+          const signal = abortController.signal;
 
-          // 初始重置类名
-          bannerItems.forEach((item, index) => {
-            if (index !== currentIndex) item.classList.remove('active');
+          bannerItems.forEach((item, i) => {
+            item.classList.toggle('active', i === currentIndex);
           });
-          bannerItems[currentIndex].classList.add('active');
 
           while (!signal.aborted) {
-            const item = bannerItems[currentIndex];
-            await handleBannerAnimation(item);
-            
+            await handleBannerAnimation(bannerItems[currentIndex]);
             if (signal.aborted) break;
-
-            // 切换到下一条
-            item.classList.remove('active');
+            bannerItems[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % totalBanners;
             bannerItems[currentIndex].classList.add('active');
-            
-            await new Promise(r => setTimeout(r, 600)); // 切换过渡时间
+            await new Promise(r => setTimeout(r, 600));
           }
         };
 
-        // 点击横幅手动切换下一条
         bannerEl.addEventListener('click', () => {
-          if (!bannerLoopAbort) return;
-          bannerLoopAbort.abort();
+          if (abortController) abortController.abort();
           currentIndex = (currentIndex + 1) % totalBanners;
-          startBannerLoop();
+          startLoop();
         });
 
-        startBannerLoop();
+        startLoop();
       })();
 
-      // 初始渲染
       if (plugins.length > 0) render('all', '');
     })();
   </script>
