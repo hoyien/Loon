@@ -14,635 +14,649 @@
   <link rel="icon" href="../Icon/PluginLab/LoonPluginLab.png" type="image/png">
   <link rel="apple-touch-icon" href="../Icon/PluginLab/LoonPluginLab-White.png">
 
+  <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
   <style>
-    /* =========================================
-       1. 变量定义 (CSS Variables)
-       ========================================= */
+  /* =========================================
+     1. 全局重置与基础设置
+     ========================================= */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  :root {
+    /* 安全区域变量（确保 PWA/刘海屏正确适配） */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+
+    /* 浅色主题 */
+    --bg-body: #F2F2F7;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FAFAFA;
+    --bg-header: #F2F2F7;
+    --text-primary: #1C1C1E;
+    --text-secondary: #8E8E93;
+    --text-tertiary: #AEAEB2;
+    --color-accent: #007AFF;
+    --border-separator: #C6C6C8;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+  }
+
+  @media (prefers-color-scheme: dark) {
     :root {
-      /* 安全区域 - 使用 max 确保有默认边距 */
-      --safe-top: env(safe-area-inset-top, 20px);
-      --safe-bottom: env(safe-area-inset-bottom, 20px);
-      --safe-left: env(safe-area-inset-left, 0px);
-      --safe-right: env(safe-area-inset-right, 0px);
-      
-      --header-height: 60px;
-      --content-width: 1200px;
+      --bg-body: #000000;
+      --bg-card: #1C1C1E;
+      --bg-card-hover: #2C2C2E;
+      --bg-header: #000000;
+      --text-primary: #F2F2F7;
+      --text-secondary: #8E8E93;
+      --text-tertiary: #636366;
+      --color-accent: #0A84FF;
+      --border-separator: #38383A;
+    }
+  }
 
-      /* 浅色模式 */
-      --bg-body: #F2F2F7;
-      --bg-card: #FFFFFF;
-      --bg-card-hover: rgba(255, 255, 255, 0.8);
-      --bg-input: rgba(118, 118, 128, 0.12);
-      --bg-glass: rgba(242, 242, 247, 0.8);
-      
-      --text-primary: #000000;
-      --text-secondary: #3C3C43; /* 60% opacity look */
-      --text-tertiary: #3C3C43;  /* 30% opacity look */
-      
-      --color-accent: #007AFF;
-      --color-tag-bg: rgba(0, 122, 255, 0.1);
-      
-      --border-color: rgba(60, 60, 67, 0.1); /* Separator color */
-      
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-      
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 18px;
+  /* 禁用系统默认滚动回弹（尤其对 iOS PWA 至关重要） */
+  html {
+    scroll-behavior: smooth;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100dvh; /* 优先使用 dvh，避免 iOS 地址栏导致的布局跳动 */
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* =========================================
+     2. 顶部导航栏（Header）
+     ========================================= */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-header);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 0.5px solid var(--border-separator);
+    padding: calc(0.8rem + var(--safe-top)) 1.5rem 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-logo img {
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  .header-title-block {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    width: calc(100% - 200px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  header p {
+    margin-top: 2px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  /* =========================================
+     3. 菜单按钮与二级菜单
+     ========================================= */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 1001;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 2.5px;
+    background-color: var(--color-accent);
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .menu-toggle span:nth-child(1) { width: 22px; }
+  .menu-toggle span:nth-child(2) { width: 16px; opacity: 1; }
+  .menu-toggle span:nth-child(3) { width: 22px; }
+
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+    background-color: var(--text-primary);
+  }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+    background-color: var(--text-primary);
+  }
+
+  .secondary-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: calc(1.5rem + var(--safe-right));
+    background: var(--bg-card);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    z-index: 1001;
+    min-width: 180px;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.92) translateY(-10px);
+    transform-origin: top right;
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+
+  .secondary-menu.active {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    text-decoration: none;
+    color: var(--text-primary);
+    width: 100%;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+
+  .menu-item:hover, .menu-item:focus {
+    background-color: var(--bg-body);
+    outline: none;
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+    background-color: var(--color-accent);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    flex-shrink: 0;
+  }
+
+  .icon-telegram {
+    -webkit-mask-image: url('../Icon/PluginLab/Telegram.svg');
+    mask-image: url('../Icon/PluginLab/Telegram.svg');
+  }
+
+  .icon-github {
+    -webkit-mask-image: url('../Icon/PluginLab/GitHub.svg');
+    mask-image: url('../Icon/PluginLab/GitHub.svg');
+  }
+
+  /* =========================================
+     4. 主体内容区域
+     ========================================= */
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    padding-top: calc(66px + var(--safe-top) + 1.5rem);
+    padding-bottom: calc(2rem + var(--safe-bottom));
+  }
+
+  /* 公告横幅 */
+  .announcement-banner {
+    background-color: #fff9de;
+    color: #1d1d1f;
+    border: 1px solid #e1e4e8;
+    border-radius: var(--radius-lg);
+    margin-bottom: 1rem;
+    position: relative;
+    min-height: 3.2rem;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .announcement-banner {
+      background-color: #3a372d;
+      color: #e2e2e2;
+      border-color: #444;
+    }
+  }
+
+  .banner-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 0;
+    white-space: nowrap;
+    transform: translateX(0);
+  }
+
+  .banner-item.active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  /* 搜索与标签 */
+  .search-box {
+    margin-bottom: 2rem;
+  }
+
+  #search {
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 1.05rem;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-separator);
+    transition: all 0.2s;
+  }
+
+  #search:focus {
+    outline: 2px solid var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .tabs button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border-separator);
+  }
+
+  .tabs button:hover, .tabs button:focus {
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .tabs button.active {
+    background: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+    transform: scale(1.02);
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem;
+    color: var(--text-primary);
+  }
+
+  /* 插件列表 */
+  .list {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.2rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-card-hover);
+  }
+
+  .card:active {
+    transform: translateY(0) scale(0.98);
+    transition-duration: 0.1s;
+  }
+
+  .card-inner-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--bg-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--text-secondary);
+  }
+
+  .card-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-update-time {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin: 0.2rem 0 0.6rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .card-tags {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-item {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: rgba(0, 122, 255, 0.1);
+    border-radius: 100px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .tag-item {
+      background: rgba(10, 132, 255, 0.2);
+      color: #66b2ff;
+    }
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--text-tertiary);
+    padding: 4rem 1rem;
+    grid-column: 1 / -1;
+    font-size: 0.95rem;
+  }
+
+  /* =========================================
+     5. 底部
+     ========================================= */
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-top: 2rem;
+    padding-bottom: calc(1rem + var(--safe-bottom));
+    line-height: 1.8;
+  }
+
+  /* =========================================
+     6. 桌面端优化（768px+）
+     ========================================= */
+  @media (min-width: 768px) {
+    header {
+      padding: 1rem 2rem;
     }
 
-    /* 深色模式 */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-body: #000000;
-        --bg-card: #1C1C1E;
-        --bg-card-hover: #2C2C2E;
-        --bg-input: rgba(118, 118, 128, 0.24);
-        --bg-glass: rgba(28, 28, 30, 0.8);
-
-        --text-primary: #FFFFFF;
-        --text-secondary: #EBEBF5; /* 60% */
-        --text-tertiary: #EBEBF5;  /* 30% */
-        
-        --color-accent: #0A84FF;
-        --color-tag-bg: rgba(10, 132, 255, 0.15);
-        
-        --border-color: rgba(84, 84, 88, 0.35);
-        
-        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-        --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-      }
-      
-      /* 针对 Safari 橡皮筋效果的修正 */
-      body { background-color: #000; }
+    .header-title-block {
+      width: calc(100% - 300px);
     }
 
-    /* =========================================
-       2. 全局重置 (Reset & Base)
-       ========================================= */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
+    header h1 {
+      font-size: 1.4rem;
+    }
+
+    /* 桌面端显示平铺菜单 */
+    .menu-toggle {
+      display: none;
+    }
+
+    .secondary-menu {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      transform: none !important;
+      position: static;
+      background: transparent;
+      box-shadow: none;
       padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-body);
-      color: var(--text-primary);
-      line-height: 1.5;
-      min-height: 100vh;
-      /* PWA 优化：防止下拉刷新等默认行为干扰 App 体验 */
-      overscroll-behavior-y: none; 
-    }
-
-    a { text-decoration: none; color: inherit; }
-    button, input { font: inherit; border: none; outline: none; background: none; }
-    
-    /* 辅助类：文本透明度模拟 */
-    .text-secondary { color: var(--text-secondary); opacity: 0.6; }
-    .text-tertiary { color: var(--text-tertiary); opacity: 0.3; }
-
-    /* =========================================
-       3. 顶部导航栏 (Header)
-       ========================================= */
-    .app-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background-color: var(--bg-glass);
-      border-bottom: 0.5px solid var(--border-color);
-      
-      /* 磨砂玻璃效果 */
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      
-      /* 适配刘海屏 padding */
-      padding-top: var(--safe-top);
-      padding-left: var(--safe-left);
-      padding-right: var(--safe-right);
-      height: calc(var(--header-height) + var(--safe-top));
-      
-      display: flex;
+      gap: 0.5rem;
       align-items: center;
-      justify-content: space-between;
-    }
-    
-    .header-inner {
-      width: 100%;
-      height: 100%;
-      padding: 0 16px;
-      display: grid;
-      /* 左中右布局：左侧logo，中间标题自适应，右侧按钮 */
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 12px;
-      max-width: var(--content-width);
-      margin: 0 auto;
+      min-width: auto;
     }
 
-    /* Logo 区域 */
-    .logo-area {
-      display: flex;
-      align-items: center;
-    }
-    .logo-img {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: block;
-    }
-
-    /* 标题区域 */
-    .title-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-    .app-title {
-      font-size: 17px;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
-    }
-    .app-subtitle {
-      font-size: 11px;
-      margin-top: -2px;
-    }
-
-    /* 菜单按钮区域 */
-    .controls-area {
-      display: flex;
-      justify-content: flex-end;
-      min-width: 32px; /* 占位，保持平衡 */
-    }
-
-    /* 汉堡菜单按钮 */
-    .burger-btn {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 5px;
-      cursor: pointer;
-      position: relative;
-      z-index: 1002;
-    }
-    .burger-line {
-      width: 20px;
-      height: 2px;
-      background-color: var(--color-accent);
-      border-radius: 2px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .burger-line:nth-child(2) { width: 14px; }
-    
-    /* 激活态 */
-    .burger-btn.active .burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 22px; background-color: var(--text-primary); }
-    .burger-btn.active .burger-line:nth-child(2) { opacity: 0; }
-    .burger-btn.active .burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 22px; background-color: var(--text-primary); }
-
-    /* 下拉菜单 (Mobile) */
-    .dropdown-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 16px;
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
+    .menu-item {
       padding: 8px;
-      box-shadow: var(--shadow-md);
-      width: 160px;
-      transform-origin: top right;
-      transform: scale(0.9) opacity(0);
-      visibility: hidden;
-      transition: all 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
-      border: 0.5px solid var(--border-color);
-    }
-    .dropdown-menu.active {
-      transform: scale(1) opacity(1);
-      visibility: visible;
-    }
-    .menu-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-    .menu-link:active {
-      background-color: var(--bg-input);
+      border-radius: 50%;
+      width: auto;
     }
 
-    /* 图标遮罩 */
-    .icon-mask {
-      width: 20px;
-      height: 20px;
-      background-color: var(--text-primary);
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-size: contain;
-      mask-size: contain;
-      -webkit-mask-position: center;
-      mask-position: center;
-    }
-    .icon-tg { -webkit-mask-image: url('../Icon/PluginLab/Telegram.svg'); mask-image: url('../Icon/PluginLab/Telegram.svg'); }
-    .icon-git { -webkit-mask-image: url('../Icon/PluginLab/GitHub.svg'); mask-image: url('../Icon/PluginLab/GitHub.svg'); }
-
-    /* =========================================
-       4. 主内容区域 (Main Layout)
-       ========================================= */
-    .main-wrapper {
-      width: 100%;
-      max-width: var(--content-width);
-      margin: 0 auto;
-      /* 顶部避让 Header，底部避让 Safe Area */
-      padding-top: calc(var(--header-height) + var(--safe-top) + 20px);
-      padding-bottom: calc(var(--safe-bottom) + 30px);
-      padding-left: calc(16px + var(--safe-left));
-      padding-right: calc(16px + var(--safe-right));
+    .menu-item-content span:not(.icon) {
+      display: none;
     }
 
-    /* 公告条 */
-    .banner {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color); /* 边框代替纯背景色，更适配深色模式 */
-      border-left: 4px solid #FFCC00; /* 醒目的左边框 */
-      border-radius: var(--radius-md);
-      height: 48px;
-      margin-bottom: 24px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-    }
-    .banner-text {
-      position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      font-size: 14px;
-      font-weight: 500;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      white-space: nowrap;
-    }
-    .banner-text.active {
-      opacity: 1;
-      transform: translateY(0);
-      z-index: 1;
+    .menu-item-content {
+      gap: 0;
     }
 
-    /* 搜索与筛选区 */
-    .filter-section {
-      margin-bottom: 24px;
-    }
-    
-    .search-wrapper {
-      position: relative;
-      margin-bottom: 16px;
-    }
-    .search-input {
-      width: 100%;
-      height: 44px;
-      padding: 0 16px;
-      border-radius: 10px;
-      background-color: var(--bg-input);
-      color: var(--text-primary);
-      font-size: 16px;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .search-input:focus {
-      background-color: var(--bg-card);
-      box-shadow: 0 0 0 2px var(--color-accent);
+    .wrap {
+      padding: 2rem;
     }
 
-    .tabs-scroll {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 4px; /* 预留滚动条空间（虽然隐藏了） */
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE/Edge */
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
     }
-    .tabs-scroll::-webkit-scrollbar { display: none; }
-    
-    .tab-btn {
-      padding: 8px 16px;
-      border-radius: 20px;
-      background-color: var(--bg-card);
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 600;
-      white-space: nowrap;
-      transition: all 0.2s;
-      border: 0.5px solid var(--border-color);
-    }
-    .tab-btn.active {
-      background-color: var(--color-accent);
-      color: #FFF;
-      border-color: transparent;
-      box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
-    }
-    @media (hover: hover) {
-      .tab-btn:hover:not(.active) {
-        background-color: var(--bg-input);
-      }
+  }
+
+  /* =========================================
+     7. 超小屏适配（< 360px）
+     ========================================= */
+  @media (max-width: 360px) {
+    .card-inner-layout {
+      gap: 0.75rem;
     }
 
-    /* 列表标题 */
-    .section-header {
-      font-size: 22px;
-      font-weight: 700;
-      margin: 30px 0 16px;
-      padding-left: 4px;
-    }
-
-    /* =========================================
-       5. 插件卡片 (Grid Layout)
-       ========================================= */
-    .plugin-grid {
-      display: grid;
-      /* 自适应列宽，手机端通常1列，折叠屏/平板2列，桌面3-4列 */
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-
-    .plugin-card {
-      background-color: var(--bg-card);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-      border: 0.5px solid transparent;
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* 桌面端 Hover 效果 */
-    @media (hover: hover) {
-      .plugin-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-md);
-        background-color: var(--bg-card-hover);
-        border-color: var(--border-color);
-        z-index: 10;
-      }
-    }
-    /* 移动端点击反馈 */
-    .plugin-card:active {
-      transform: scale(0.98);
-      background-color: var(--bg-input);
-    }
-
-    .card-top {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 12px;
-    }
-    
     .card-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      object-fit: cover;
-      background-color: var(--bg-input);
-      border: 0.5px solid var(--border-color);
-      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
     }
 
-    .card-meta {
-      flex: 1;
-      min-width: 0; /* Flex子项溢出省略关键 */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
     .card-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 1.05rem;
     }
-    .card-date {
-      font-size: 12px;
-      color: var(--text-tertiary);
-      opacity: 0.6;
-    }
-
-    .card-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      opacity: 0.8;
-      line-height: 1.5;
-      margin-bottom: 16px;
-      /* 限制两行 */
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      flex-grow: 1; /* 撑满高度，使 Tags 底部对齐 */
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: auto;
-    }
-    .tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background-color: var(--color-tag-bg);
-      color: var(--color-accent);
-      font-weight: 500;
-    }
-
-    /* 空状态 */
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 60px 0;
-      color: var(--text-tertiary);
-      opacity: 0.5;
-    }
-
-    /* 页脚 */
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 12px;
-      color: var(--text-tertiary);
-      opacity: 0.5;
-      line-height: 2;
-    }
-
-    /* =========================================
-       6. 桌面端适配 (Desktop Query)
-       ========================================= */
-    @media (min-width: 768px) {
-      .header-inner {
-        padding: 0 32px;
-      }
-      
-      /* 隐藏汉堡按钮 */
-      .burger-btn { display: none; }
-      
-      /* 菜单变为行内显示 */
-      .dropdown-menu {
-        position: static;
-        width: auto;
-        box-shadow: none;
-        background: none;
-        border: none;
-        padding: 0;
-        visibility: visible;
-        opacity: 1;
-        transform: none;
-        display: flex;
-        gap: 8px;
-      }
-      
-      .menu-link {
-        padding: 8px 12px;
-        background: transparent;
-        font-size: 14px;
-        border-radius: 20px;
-        transition: background 0.2s;
-      }
-      .menu-link:hover {
-        background-color: var(--bg-input);
-      }
-      
-      .menu-link span:not(.icon-mask) {
-        display: none; /* 仅显示图标，或可选择显示文字 */
-      }
-      @media (min-width: 1024px) {
-         .menu-link span:not(.icon-mask) { display: inline; } /* 大屏显示文字 */
-      }
-      
-      .main-wrapper {
-        padding-left: 32px;
-        padding-right: 32px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
-  <header class="app-header">
-    <div class="header-inner">
-      <div class="logo-area">
-        <a href="javascript:location.reload();" title="刷新页面">
-          <img src="../Icon/PluginLab/LoonPluginLab.png" alt="Logo" class="logo-img">
-        </a>
-      </div>
-      
-      <div class="title-area">
-        <h1 class="app-title">Loon 插件仓库</h1>
-        <p class="app-subtitle text-secondary">点击卡片即可一键导入</p>
-      </div>
-
-      <div class="controls-area">
-        <div id="menu-toggle" class="burger-btn" aria-label="菜单">
-          <span class="burger-line"></span>
-          <span class="burger-line"></span>
-          <span class="burger-line"></span>
-        </div>
-        
-        <nav id="secondary-menu" class="dropdown-menu">
-          <a href="https://t.me/BoEchoBot" target="_blank" class="menu-link">
-            <i class="icon-mask icon-tg"></i>
+  <header>
+    <div class="header-logo">
+      <a href="" title="刷新页面" aria-label="刷新页面">
+        <img src="../Icon/PluginLab/LoonPluginLab.png" alt="Loon Plugin Lab Logo">
+      </a>
+    </div>
+    <div class="header-title-block">
+      <h1>Loon 插件仓库</h1>
+      <p>点击插件卡片即可跳转安装插件</p>
+    </div>
+    <div class="header-controls">
+      <button id="menu-toggle" class="menu-toggle" aria-label="更多功能" title="更多功能">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="secondary-menu" class="secondary-menu">
+        <a href="https://t.me/BoEchoBot" target="_blank" class="menu-item" aria-label="Telegram" title="Telegram">
+          <div class="menu-item-content">
+            <span class="icon icon-telegram"></span>
             <span>Telegram</span>
-          </a>
-          <a href="https://github.com/sooyaaabo/Loon" target="_blank" class="menu-link">
-            <i class="icon-mask icon-git"></i>
+          </div>
+        </a>
+        <a href="https://github.com/sooyaaabo/Loon" target="_blank" class="menu-item" aria-label="GitHub" title="GitHub">
+          <div class="menu-item-content">
+            <span class="icon icon-github"></span>
             <span>GitHub</span>
-          </a>
-        </nav>
+          </div>
+        </a>
       </div>
     </div>
   </header>
 
-  <div class="main-wrapper">
-    <div class="banner" id="announcementBanner">
-      </div>
+  <div class="wrap">
+    <div class="announcement-banner" id="announcementBanner"></div>
 
-    <div class="filter-section">
-      <div class="search-wrapper">
-        <input id="search" class="search-input" placeholder="搜索插件名称、描述或标签…">
-      </div>
-      <div class="tabs-scroll tabs">
-        <button class="tab-btn active" data-cat="all">全部</button>
-        <button class="tab-btn" data-cat="去广告">去广告</button>
-        <button class="tab-btn" data-cat="功能增强">功能增强</button>
-        <button class="tab-btn" data-cat="解锁会员">解锁会员</button>
-        <button class="tab-btn" data-cat="定时任务">定时任务</button>
+    <div class="search-box">
+      <input id="search" placeholder="搜索插件名称或标签…">
+      <div class="tabs">
+        <button class="tab active" data-cat="all">全部</button>
+        <button class="tab" data-cat="去广告">去广告</button>
+        <button class="tab" data-cat="功能增强">功能增强</button>
+        <button class="tab" data-cat="解锁会员">解锁会员</button>
+        <button class="tab" data-cat="定时任务">定时任务</button>
       </div>
     </div>
 
-    <div class="section-header" id="sectionTitle">正在加载…</div>
+    <div class="section-title" id="sectionTitle">正在加载…</div>
     
-    <div class="plugin-grid list" id="list">
-      <div class="empty-state">正在与 GitHub 通信…</div>
+    <div class="list" id="list">
+      <div class="empty">正在从 GitHub 加载插件列表，请稍候…</div>
     </div>
 
     <footer>
-      <span>更新时间：</span><span id="updateTime">--</span><br>
+      <span>更新时间</span>：<span id="updateTime">--</span><br>
       Copyright &copy; <span id="copyright-year">2025</span> sooyaaabo. All rights reserved.
     </footer>
   </div>
 
   <script>
-    // 保持 JS 逻辑不变，仅更新了类名引用以匹配新样式
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
     (async () => {
+      // =========================================
+      // 1. 配置与常量 (Configuration)
+      // =========================================
       const TEXT = {
         repoTitle: 'Loon 插件仓库',
-        repoDesc: '点击卡片即可一键导入', // 微调文案
-        bannerWarning: '禁止在中华人民共和国境内平台公开传播本仓库内容以及将其用于任何商业或非法用途！',
-        bannerDisclaimer: '本网站由个人制作与维护，与 Loon 官方无关。',
-        bannerUpdateNotice: '如果插件提示“Loon的版本过旧”，请前往 App Store 更新软件。',
-        loadingPlugins: '正在从 GitHub 加载插件列表…',
-        loadFailed: (msg) => `加载失败：${msg}`,
-        noPluginsFound: '仓库中未找到 .lpx 文件',
-        noMatch: '没有找到匹配的插件',
-        sectionTitle: (cat, count) => `${cat} · ${count}`,
-        cardNoDesc: '暂无描述',
+        repoDesc: '点击插件卡片即可跳转安装插件',
+        telegram: 'Telegram',
+        github: 'GitHub',
+        bannerWarning: '禁止在中华人民共和国境内平台公开传播本仓库内容以及将其用于任何商业或非法用途！如有发现，请向平台举报！',
+        bannerDisclaimer: '本网站由个人制作与维护，与Loon官方无关。',
+        bannerUpdateNotice: '如果插件提示“Loon的版本过旧，插件功能受限”，请自行前往 App Store 进行软件更新。',
+        searchPlaceholder: '搜索插件名称或标签…',
         catAll: '全部',
         catAdblock: '去广告',
-        catEnhance: '增强',
-        catUnlock: '解锁',
-        catCron: '任务'
+        catEnhance: '功能增强',
+        catUnlock: '解锁会员',
+        catCron: '定时任务',
+        sectionTitle: (cat, count) => `${cat} · ${count} 个插件`,
+        loadingPlugins: '正在从 GitHub 加载插件列表，请稍候…',
+        loadFailed: (msg) => `加载插件失败：${msg}`,
+        noPluginsFound: '在仓库中没有找到任何 .lpx 文件。',
+        noMatch: '暂无匹配的插件',
+        updateTimeLabel: '更新时间',
+        cardUpdateTime: '更新于 ',
+        cardNoDesc: '暂无描述',
+        getFailed: '获取失败',
+        loading: '正在加载…'
       };
 
+      // =========================================
+      // 2. DOM 元素获取 (DOM Selection)
+      // =========================================
       const menuToggle = document.getElementById('menu-toggle');
       const secondaryMenu = document.getElementById('secondary-menu');
       const listEl = document.getElementById('list');
@@ -651,150 +665,269 @@
       const sectionTitleEl = document.getElementById('sectionTitle');
       const updateTimeEl = document.getElementById('updateTime');
 
-      // Banner Init
+      // =========================================
+      // 3. 初始化 UI (UI Initialization)
+      // =========================================
+      
+      // 初始化横幅公告内容
       const bannerContainer = document.getElementById('announcementBanner');
-      [TEXT.bannerWarning, TEXT.bannerDisclaimer, TEXT.bannerUpdateNotice].forEach((msg, i) => {
-        const div = document.createElement('div');
-        div.className = `banner-text ${i === 0 ? 'active' : ''}`; // 使用 div 配合 flex
-        div.textContent = msg;
-        bannerContainer.appendChild(div);
+      const bannerMessages = [TEXT.bannerWarning, TEXT.bannerDisclaimer, TEXT.bannerUpdateNotice];
+      bannerMessages.forEach((message, index) => {
+        const p = document.createElement('p');
+        p.className = 'banner-item';
+        if (index === 0) p.classList.add('active'); // 默认显示第一条
+        p.textContent = message;
+        bannerContainer.appendChild(p);
       });
 
-      document.querySelector('.app-title').textContent = TEXT.repoTitle;
-      document.querySelector('.app-subtitle').textContent = TEXT.repoDesc;
-      document.querySelector('#copyright-year').textContent = new Date().getFullYear();
-
-      // Tab 文字更新
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-         const cat = btn.dataset.cat;
-         // 简单映射，保持逻辑
-         let label = cat;
-         if(cat === 'all') label = TEXT.catAll;
-         else if(cat === '去广告') label = TEXT.catAdblock;
-         else if(cat === '功能增强') label = TEXT.catEnhance;
-         else if(cat === '解锁会员') label = TEXT.catUnlock;
-         else if(cat === '定时任务') label = TEXT.catCron;
-         btn.textContent = label;
+      // 设置静态文本内容
+      document.querySelector('h1').textContent = TEXT.repoTitle;
+      document.querySelector('header p').textContent = TEXT.repoDesc;
+      searchEl.placeholder = TEXT.searchPlaceholder;
+      
+      // 设置 Tab 按钮文本
+      document.querySelectorAll('.tab').forEach(btn => {
+        const cat = btn.dataset.cat;
+        btn.textContent = TEXT[`cat${cat === 'all' ? 'All' : cat === '去广告' ? 'Adblock' : cat === '功能增强' ? 'Enhance' : cat === '解锁会员' ? 'Unlock' : 'Cron'}`];
       });
+      
+      document.querySelector('footer span').textContent = TEXT.updateTimeLabel;
+      document.querySelector('#list .empty').textContent = TEXT.loadingPlugins;
+      sectionTitleEl.textContent = TEXT.loading;
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
-      // Data Fetching
+      // =========================================
+      // 5. 数据获取与处理 (Data Fetching & Processing)
+      // =========================================
       let plugins = [];
+
       const GITHUB_REPO = 'sooyaaabo/Loon';
       const PLUGIN_DIR_PATH = 'Plugin';
 
       try {
-        const allFilesRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${PLUGIN_DIR_PATH}`);
-        const allFiles = await allFilesRes.json();
-        if (!Array.isArray(allFiles)) throw new Error('API Error');
+        // 请求 GitHub API 获取文件列表
+        const allFilesResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${PLUGIN_DIR_PATH}`);
+        const allFiles = await allFilesResponse.json();
         
-        const pluginFiles = allFiles.filter(f => f.name.toLowerCase().endsWith('.lpx'));
-        if (!pluginFiles.length) throw new Error(TEXT.noPluginsFound);
+        if (!Array.isArray(allFiles)) throw new Error('无效的 GitHub API 响应。');
 
-        const pluginContents = await Promise.all(pluginFiles.map(f => fetch(f.download_url).then(r => r.text())));
-        
+        // 筛选出 .lpx 后缀的文件
+        const pluginFiles = allFiles.filter(file => file.name.toLowerCase().endsWith('.lpx'));
+        if (pluginFiles.length === 0) throw new Error(TEXT.noPluginsFound);
+
+        // 并发获取所有插件文件的内容
+        const pluginContents = await Promise.all(
+          pluginFiles.map(file => fetch(file.download_url).then(res => res.text()))
+        );
+
+        // 解析文件内容提取元数据
         plugins = pluginContents.map((text, i) => {
           const file = pluginFiles[i];
+          // 正则匹配 #!name, #!desc 等配置项
           const name = (text.match(/#!\s*name\s*=\s*(.+)/i) || [])[1]?.trim() || file.name;
-          const desc = (text.match(/#!\s*desc\s*=\s*(.+)/i) || [])[1]?.trim() || TEXT.cardNoDesc;
+          const desc = (text.match(/#!\s*desc\s*=\s*(.+)/i) || [])[1]?.trim() || 'No description available';
           const icon = (text.match(/#!\s*icon\s*=\s*(.+)/i) || [])[1]?.trim() || '';
           const date = (text.match(/#!\s*date\s*=\s*(.+)/i) || [])[1]?.trim() || 'Unknown';
           const tagStr = (text.match(/#!\s*tag\s*=\s*(.+)/i) || [])[1]?.trim();
           const tags = tagStr ? tagStr.split(',').map(t => t.trim()).filter(Boolean) : [];
+          
           return { url: file.download_url, name, desc, icon, date, tags };
         });
-      } catch (err) {
-        listEl.innerHTML = `<div class="empty-state">${TEXT.loadFailed(err.message)}</div>`;
+      } catch (error) {
+        listEl.innerHTML = `<div class="empty">${TEXT.loadFailed(error.message)}</div>`;
+        sectionTitleEl.textContent = 'Error';
         return;
       }
 
-      // Time
+      // 获取最近提交时间作为更新时间
       try {
-        const commits = await (await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits?path=${PLUGIN_DIR_PATH}`)).json();
-        const latest = commits[0]?.commit?.author?.date;
-        if (latest) updateTimeEl.textContent = new Date(latest).toLocaleString('zh-CN', {month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
-      } catch {}
+        const commitsResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits?path=${PLUGIN_DIR_PATH}`);
+        const commits = await commitsResponse.json();
+        const latestCommitDate = commits[0]?.commit?.author?.date || commits[0]?.commit?.committer?.date;
+        if (latestCommitDate) {
+          const d = new Date(latestCommitDate);
+          updateTimeEl.textContent = d.toLocaleString('zh-CN', {
+            year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+          });
+        }
+      } catch {
+        updateTimeEl.textContent = TEXT.getFailed;
+      }
 
-      // Render
-      function render(cat = 'all', kw = '') {
-        const lowKw = kw.toLowerCase();
+      // =========================================
+      // 6. 渲染逻辑 (Rendering)
+      // =========================================
+      function render(filterCat = 'all', kw = '') {
+        const lowerKw = kw.toLowerCase();
+        
+        // 过滤数据
         const filtered = plugins.filter(p => {
-          const hitCat = cat === 'all' || p.tags.includes(cat);
-          const hitKw = !lowKw || p.name.toLowerCase().includes(lowKw) || p.tags.some(t => t.toLowerCase().includes(lowKw));
+          const hitCat = filterCat === 'all' || p.tags.includes(filterCat);
+          const hitKw = !lowerKw || p.name.toLowerCase().includes(lowerKw) || p.tags.some(tag => tag.toLowerCase().includes(lowerKw));
           return hitCat && hitKw;
         });
 
-        // Update Title
-        const activeTab = tabsEl.querySelector(`[data-cat="${cat}"]`);
-        sectionTitleEl.textContent = TEXT.sectionTitle(activeTab ? activeTab.textContent : '列表', filtered.length);
-        
+        // 更新标题
+        const catText = tabsEl.querySelector(`[data-cat="${filterCat}"]`).textContent;
+        sectionTitleEl.textContent = TEXT.sectionTitle(catText, filtered.length);
         listEl.innerHTML = '';
+
         if (!filtered.length) {
-          listEl.innerHTML = `<div class="empty-state">${TEXT.noMatch}</div>`;
+          listEl.innerHTML = `<div class="empty">${TEXT.noMatch}</div>`;
           return;
         }
 
+        // 生成卡片
         filtered.forEach(p => {
           const card = document.createElement('a');
-          card.className = 'plugin-card';
+          card.className = 'card';
+          // 生成 Loon 导入链接
           card.href = `loon://import?plugin=${encodeURIComponent(p.url)}`;
           
-          const tagsHtml = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
-          
+          const tagsHtml = p.tags.map(tag => `<span class="tag-item">${tag}</span>`).join(' ');
+          const descText = (p.desc === '暂无描述' || p.desc === 'No description available') ? TEXT.cardNoDesc : p.desc;
+
           card.innerHTML = `
-            <div class="card-top">
-              ${p.icon ? `<img src="${p.icon}" class="card-icon" loading="lazy">` : `<div class="card-icon" style="display:flex;align-items:center;justify-content:center;color:#ccc">L</div>`}
-              <div class="card-meta">
-                <div class="card-title">${p.name}</div>
-                <div class="card-date">${p.date}</div>
+            <div class="card-inner-layout">
+              ${p.icon ? `<img src="${p.icon}" class="card-icon" alt="${p.name} icon" loading="lazy">` : ''}
+              <div class="card-content">
+                <div class="card-header">
+                  <h3 class="card-title">${p.name}</h3>
+                </div>
+                <p class="card-update-time">${TEXT.cardUpdateTime}${p.date}</p>
+                <p class="card-desc">${descText}</p>
+                <div class="card-tags">${tagsHtml}</div>
               </div>
-            </div>
-            <div class="card-desc">${p.desc}</div>
-            <div class="card-tags">${tagsHtml}</div>
-          `;
+            </div>`;
           listEl.appendChild(card);
         });
-      }
+      };
 
-      // Listeners
-      menuToggle.addEventListener('click', (e) => {
+      // =========================================
+      // 4. 事件监听 (Event Listeners)
+      // =========================================
+      
+      // 菜单点击切换
+      menuToggle.addEventListener('click', e => {
         e.stopPropagation();
-        menuToggle.classList.toggle('active');
         secondaryMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
       });
-      document.addEventListener('click', (e) => {
-        if (!secondaryMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-          menuToggle.classList.remove('active');
+
+      // 点击菜单内部时关闭菜单（如果是链接）
+      secondaryMenu.addEventListener('click', e => {
+        if (e.target.closest('.menu-item')) {
           secondaryMenu.classList.remove('active');
+          menuToggle.classList.remove('active');
         }
       });
 
+      // 点击外部关闭菜单
+      document.addEventListener('click', e => {
+        if (!secondaryMenu.contains(e.target) && !menuToggle.contains(e.target) && secondaryMenu.classList.contains('active')) {
+          secondaryMenu.classList.remove('active');
+          menuToggle.classList.remove('active');
+        }
+      });
+
+      // Tab 切换事件
       tabsEl.addEventListener('click', e => {
-        if (e.target.classList.contains('tab-btn')) {
+        if (e.target.matches('.tab')) {
           tabsEl.querySelector('.active').classList.remove('active');
           e.target.classList.add('active');
           render(e.target.dataset.cat, searchEl.value);
         }
       });
 
+      // 搜索框输入事件
       searchEl.addEventListener('input', () => {
-        const activeCat = tabsEl.querySelector('.active').dataset.cat;
-        render(activeCat, searchEl.value);
+        render(tabsEl.querySelector('.tab.active').dataset.cat, searchEl.value);
       });
 
-      // Banner Animation (Optimized)
-      const bannerItems = document.querySelectorAll('.banner-text');
-      if (bannerItems.length > 1) {
-        let idx = 0;
-        const rotate = () => {
-          bannerItems[idx].classList.remove('active');
-          idx = (idx + 1) % bannerItems.length;
-          bannerItems[idx].classList.add('active');
-        };
-        setInterval(rotate, 5000); // 简单的 5秒切换，不做复杂的文字滚动检测以提升性能
-      }
+      // =========================================
+      // 7. 公告栏滚动动画逻辑 (Banner Animation)
+      // =========================================
+      (() => {
+        const bannerEl = document.getElementById('announcementBanner');
+        const bannerItems = bannerEl.querySelectorAll('.banner-item');
+        const totalBanners = bannerItems.length;
+        if (totalBanners <= 1) return;
 
-      // Init
-      if (plugins.length) render();
+        let currentIndex = 0;
+        let bannerLoopAbort = null;
+
+        // 处理单条横幅的动画（如果文字过长则滚动，否则停留）
+        const handleBannerAnimation = async (item) => {
+          item.style.transition = 'none';
+          item.style.transform = 'translateX(0)';
+          await new Promise(r => setTimeout(r, 50));
+          
+          const containerWidth = item.clientWidth;
+          const textWidth = item.scrollWidth;
+
+          if (textWidth > containerWidth) {
+            // 文字超出，进行跑马灯滚动
+            await new Promise(r => setTimeout(r, 1000)); // 停留1秒
+            const offset = textWidth - containerWidth;
+            const speed = 60; // 滚动速度 px/s
+            const dur = offset / speed;
+            
+            item.style.transition = `transform ${dur}s linear`;
+            item.style.transform = `translateX(-${offset}px)`;
+            
+            // 等待滚动结束
+            await new Promise(r => { item.addEventListener('transitionend', r, { once: true }); });
+            await new Promise(r => setTimeout(r, 1000)); // 结束停留1秒
+          } else {
+            // 文字未超出，固定展示2.5秒
+            await new Promise(r => setTimeout(r, 2500));
+          }
+          
+          // 重置状态
+          item.style.transition = 'none';
+          item.style.transform = 'translateX(0)';
+        };
+
+        // 循环播放控制器
+        const startBannerLoop = async () => {
+          bannerLoopAbort?.abort();
+          bannerLoopAbort = new AbortController();
+          const signal = bannerLoopAbort.signal;
+
+          // 初始重置类名
+          bannerItems.forEach((item, index) => {
+            if (index !== currentIndex) item.classList.remove('active');
+          });
+          bannerItems[currentIndex].classList.add('active');
+
+          while (!signal.aborted) {
+            const item = bannerItems[currentIndex];
+            await handleBannerAnimation(item);
+            
+            if (signal.aborted) break;
+
+            // 切换到下一条
+            item.classList.remove('active');
+            currentIndex = (currentIndex + 1) % totalBanners;
+            bannerItems[currentIndex].classList.add('active');
+            
+            await new Promise(r => setTimeout(r, 600)); // 切换过渡时间
+          }
+        };
+
+        // 点击横幅手动切换下一条
+        bannerEl.addEventListener('click', () => {
+          if (!bannerLoopAbort) return;
+          bannerLoopAbort.abort();
+          currentIndex = (currentIndex + 1) % totalBanners;
+          startBannerLoop();
+        });
+
+        startBannerLoop();
+      })();
+
+      // 初始渲染
+      if (plugins.length > 0) render('all', '');
     })();
   </script>
 </body>
