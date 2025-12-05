@@ -14,6 +14,7 @@
 # https://kelee.one/Tool/Loon/Lpx/LOL_Bible_remove_ads.lpx
 
 [Rewrite]
+# 开屏广告、弹窗推广、搜索热搜、搜索热榜、底栏推广图标
 ^https:\/\/mlol\.qt\.qq\.com\/go\/recommend\/platstrongshell\? reject-dict
 
 ^https:\/\/mlol\.qt\.qq\.com\/go\/club\/match\/get_ai_search_words$ reject-dict

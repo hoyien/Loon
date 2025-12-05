@@ -10,7 +10,11 @@
 #!icon = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/JingdongWaimai.png
 #!date = 2025-11-29 21:00
 
+# 2025-11-28 02:52:04
+# https://kelee.one/Tool/Loon/Lpx/JDWaimai_remove_ads.lpx
+
 [Rewrite]
+# 首页推广、点评页面非美食内容、购物车及我的页面推荐、搜索发现、搜索榜单、我的页面
 ^https:\/\/color\.jddj\.com\/client\.action\?functionId=hours_home$ response-body-json-jq 'del(.result.config.searchFloor.data[].searchWords) | .result.data |= map(if .tnConfigVO?.businessCode == "nearby_HourlyGo_Operation_Tags" then empty else . end)'
 
 ^https:\/\/color\.jddj\.com\/client\.action\?functionId=uniformRecommend reject-dict

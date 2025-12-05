@@ -17,6 +17,7 @@
 AND, ((URL-REGEX, "^http:\/\/.+\/amdc\/mobileDispatch"), (USER-AGENT, "DMPortal*")), REJECT
 
 [Rewrite]
+# 开屏广告、轮播图广告、弹窗广告、搜索填充词、专属推荐
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.damai\.wireless\.home\.welcome\/ reject-dict
 
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.damai\.mec\.popup\.get\/ reject-dict
