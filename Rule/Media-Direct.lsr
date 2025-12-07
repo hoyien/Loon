@@ -1,5 +1,5 @@
 # 影视播放规则(直连)
-# 2025-11-26 22:00
+# 2025-12-07 19:00
 # https://github.com/fangkuia/XPTV/blob/main/X/xptv.plugin
 
 # --------------- CMSPlayer --------------- #
@@ -156,6 +156,8 @@ DOMAIN-SUFFIX, 4kmp.com
 DOMAIN-SUFFIX, agedm.io
 # AnFuns
 DOMAIN-SUFFIX, anfuns.org
+# Anime1
+DOMAIN-SUFFIX, anime1.me
 # BILFUN
 DOMAIN-SUFFIX, xinxinysju.cc
 # Catflix
