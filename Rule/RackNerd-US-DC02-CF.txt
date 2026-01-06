@@ -5,7 +5,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--US-Africa-Cape Town-cf.113983.xyz-443
+      name: RackNerd-DC02-CF-US-cf.113983.xyz:443
       network: ws
       port: 443
       server:  cf.113983.xyz
@@ -23,7 +23,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--US---cf.113983.xyz-2053
+      name: RackNerd-DC02-CF-US-cf.113983.xyz:2053
       network: ws
       port: 2053
       server:  cf.113983.xyz
@@ -41,7 +41,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--US---cf.113983.xyz-2083
+      name: RackNerd-DC02-CF-US-cf.113983.xyz:2083
       network: ws
       port: 2083
       server:  cf.113983.xyz
@@ -59,7 +59,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--US---cf.113983.xyz-2087
+      name: RackNerd-DC02-CF-US-cf.113983.xyz:2087
       network: ws
       port: 2087
       server:  cf.113983.xyz
@@ -77,7 +77,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--US---cf.113983.xyz-2096
+      name: RackNerd-DC02-CF-US-cf.113983.xyz:2096
       network: ws
       port: 2096
       server:  cf.113983.xyz
@@ -95,7 +95,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--US---cf.113983.xyz-8443
+      name: RackNerd-DC02-CF-US-cf.113983.xyz:8443
       network: ws
       port: 8443
       server:  cf.113983.xyz
@@ -113,7 +113,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-71 ms104.18.47.28-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-71 ms-104.18.47.28:443
       network: ws
       port: 443
       server:  104.18.47.28
@@ -131,7 +131,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-71 ms104.17.156.168-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-71 ms-104.17.156.168:443
       network: ws
       port: 443
       server:  104.17.156.168
@@ -149,7 +149,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-68 ms104.19.62.26-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-68 ms-104.19.62.26:443
       network: ws
       port: 443
       server:  104.19.62.26
@@ -167,7 +167,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-70 ms104.17.149.169-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-70 ms-104.17.149.169:443
       network: ws
       port: 443
       server:  104.17.149.169
@@ -185,7 +185,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-68 ms104.17.98.100-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-68 ms-104.17.98.100:443
       network: ws
       port: 443
       server:  104.17.98.100
@@ -203,7 +203,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-71 ms104.17.172.148-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-71 ms-104.17.172.148:443
       network: ws
       port: 443
       server:  104.17.172.148
@@ -221,7 +221,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-68 ms104.17.180.209-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-68 ms-104.17.180.209:443
       network: ws
       port: 443
       server:  104.17.180.209
@@ -239,7 +239,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-69 ms104.17.183.244-443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-69 ms-104.17.183.244:443
       network: ws
       port: 443
       server:  104.17.183.244
@@ -257,7 +257,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-72 ms104.18.150.197-2053
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-72 ms-104.18.150.197:2053
       network: ws
       port: 2053
       server:  104.18.150.197
@@ -275,7 +275,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-81 ms104.19.63.43-2053
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-81 ms-104.19.63.43:2053
       network: ws
       port: 2053
       server:  104.19.63.43
@@ -293,7 +293,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-78 ms104.25.253.49-2053
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-78 ms-104.25.253.49:2053
       network: ws
       port: 2053
       server:  104.25.253.49
@@ -311,7 +311,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-65 ms104.19.36.23-2053
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-65 ms-104.19.36.23:2053
       network: ws
       port: 2053
       server:  104.19.36.23
@@ -329,7 +329,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-73 ms104.16.244.124-2053
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-73 ms-104.16.244.124:2053
       network: ws
       port: 2053
       server:  104.16.244.124
@@ -347,7 +347,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-70 ms104.17.154.194-2083
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-70 ms-104.17.154.194:2083
       network: ws
       port: 2083
       server:  104.17.154.194
@@ -365,7 +365,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-90 ms104.17.181.103-2083
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-90 ms-104.17.181.103:2083
       network: ws
       port: 2083
       server:  104.17.181.103
@@ -383,7 +383,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-81 ms104.19.33.34-2083
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-81 ms-104.19.33.34:2083
       network: ws
       port: 2083
       server:  104.19.33.34
@@ -401,7 +401,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-73 ms104.17.159.134-2083
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-73 ms-104.17.159.134:2083
       network: ws
       port: 2083
       server:  104.17.159.134
@@ -419,7 +419,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-75 ms104.17.219.124-2083
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-75 ms-104.17.219.124:2083
       network: ws
       port: 2083
       server:  104.17.219.124
@@ -437,7 +437,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-70 ms104.19.61.85-2087
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-70 ms-104.19.61.85:2087
       network: ws
       port: 2087
       server:  104.19.61.85
@@ -455,7 +455,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-74 ms104.17.113.191-2087
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-74 ms-104.17.113.191:2087
       network: ws
       port: 2087
       server:  104.17.113.191
@@ -473,7 +473,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-89 ms104.19.218.62-2087
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-89 ms-104.19.218.62:2087
       network: ws
       port: 2087
       server:  104.19.218.62
@@ -491,7 +491,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-189 ms104.16.155.221-2087
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-189 ms-104.16.155.221:2087
       network: ws
       port: 2087
       server:  104.16.155.221
@@ -509,7 +509,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-86 ms104.18.42.127-2087
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-86 ms-104.18.42.127:2087
       network: ws
       port: 2087
       server:  104.18.42.127
@@ -527,7 +527,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-74 ms104.18.236.149-2096
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-74 ms-104.18.236.149:2096
       network: ws
       port: 2096
       server:  104.18.236.149
@@ -545,7 +545,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-82 ms104.18.172.80-2096
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-82 ms-104.18.172.80:2096
       network: ws
       port: 2096
       server:  104.18.172.80
@@ -563,7 +563,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-71 ms104.17.30.81-2096
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-71 ms-104.17.30.81:2096
       network: ws
       port: 2096
       server:  104.17.30.81
@@ -581,7 +581,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-84 ms104.17.17.132-2096
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-84 ms-104.17.17.132:2096
       network: ws
       port: 2096
       server:  104.17.17.132
@@ -599,7 +599,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-90 ms104.16.158.29-2096
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-90 ms-104.16.158.29:2096
       network: ws
       port: 2096
       server:  104.16.158.29
@@ -617,7 +617,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-90 ms104.25.245.51-8443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-90 ms-104.25.245.51:8443
       network: ws
       port: 8443
       server:  104.25.245.51
@@ -635,7 +635,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-92 ms104.19.32.81-8443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-92 ms-104.19.32.81:8443
       network: ws
       port: 8443
       server:  104.19.32.81
@@ -653,7 +653,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-91 ms104.18.154.189-8443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-91 ms-104.18.154.189:8443
       network: ws
       port: 8443
       server:  104.18.154.189
@@ -671,7 +671,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-67 ms104.17.176.43-8443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-67 ms-104.17.176.43:8443
       network: ws
       port: 8443
       server:  104.17.176.43
@@ -689,7 +689,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--HKG-Asia Pacific-Hong Kong-96 ms104.17.159.139-8443
+      name: RackNerd-DC02-CF-HKG-Asia Pacific-Hong Kong-96 ms-104.17.159.139:8443
       network: ws
       port: 8443
       server:  104.17.159.139
@@ -707,7 +707,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--NRT-Asia Pacific-Tokyo-130 ms1.1.1.55-8443
+      name: RackNerd-DC02-CF-NRT-Asia Pacific-Tokyo-130 ms-1.1.1.55:8443
       network: ws
       port: 8443
       server:  1.1.1.55
@@ -725,7 +725,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--NRT-Asia Pacific-Tokyo-117 ms1.1.1.92-2087
+      name: RackNerd-DC02-CF-NRT-Asia Pacific-Tokyo-117 ms-1.1.1.92:2087
       network: ws
       port: 2087
       server:  1.1.1.92
@@ -743,7 +743,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--NRT-Asia Pacific-Tokyo-204 ms1.1.1.53-2096
+      name: RackNerd-DC02-CF-NRT-Asia Pacific-Tokyo-204 ms-1.1.1.53:2096
       network: ws
       port: 2096
       server:  1.1.1.53
@@ -761,7 +761,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--NRT-Asia Pacific-Tokyo-130 ms1.1.1.230-2083
+      name: RackNerd-DC02-CF-NRT-Asia Pacific-Tokyo-130 ms-1.1.1.230:2083
       network: ws
       port: 2083
       server:  1.1.1.230
@@ -779,7 +779,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--NRT-Asia Pacific-Tokyo-134 ms1.1.1.153-443
+      name: RackNerd-DC02-CF-NRT-Asia Pacific-Tokyo-134 ms-1.1.1.153:443
       network: ws
       port: 443
       server:  1.1.1.153
@@ -797,7 +797,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SIN-Asia Pacific-Singapore-105 ms172.64.232.240-2096
+      name: RackNerd-DC02-CF-SIN-Asia Pacific-Singapore-105 ms-172.64.232.240:2096
       network: ws
       port: 2096
       server:  172.64.232.240
@@ -815,7 +815,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SIN-Asia Pacific-Singapore-110 ms172.64.232.135-2087
+      name: RackNerd-DC02-CF-SIN-Asia Pacific-Singapore-110 ms-172.64.232.135:2087
       network: ws
       port: 2087
       server:  172.64.232.135
@@ -833,7 +833,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SIN-Asia Pacific-Singapore-103 ms172.64.232.162-2083
+      name: RackNerd-DC02-CF-SIN-Asia Pacific-Singapore-103 ms-172.64.232.162:2083
       network: ws
       port: 2083
       server:  172.64.232.162
@@ -851,7 +851,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SIN-Asia Pacific-Singapore-123 ms172.64.232.171-8443
+      name: RackNerd-DC02-CF-SIN-Asia Pacific-Singapore-123 ms-172.64.232.171:8443
       network: ws
       port: 8443
       server:  172.64.232.171
@@ -869,7 +869,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SIN-Asia Pacific-Singapore-120 ms172.64.232.103-443
+      name: RackNerd-DC02-CF-SIN-Asia Pacific-Singapore-120 ms-172.64.232.103:443
       network: ws
       port: 443
       server:  172.64.232.103
@@ -887,7 +887,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SEA-North America-Seattle-204 ms104.18.63.183-443
+      name: RackNerd-DC02-CF-SEA-North America-Seattle-204 ms-104.18.63.183:443
       network: ws
       port: 443
       server:  104.18.63.183
@@ -905,7 +905,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SEA-North America-Seattle-213 ms104.26.5.245-443
+      name: RackNerd-DC02-CF-SEA-North America-Seattle-213 ms-104.26.5.245:443
       network: ws
       port: 443
       server:  104.26.5.245
@@ -923,7 +923,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SEA-North America-Seattle-209 ms172.66.42.220-443
+      name: RackNerd-DC02-CF-SEA-North America-Seattle-209 ms-172.66.42.220:443
       network: ws
       port: 443
       server:  172.66.42.220
@@ -941,7 +941,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SEA-North America-Seattle-203 ms172.67.64.82-443
+      name: RackNerd-DC02-CF-SEA-North America-Seattle-203 ms-172.67.64.82:443
       network: ws
       port: 443
       server:  172.67.64.82
@@ -959,7 +959,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--SEA-North America-Seattle-204 ms104.16.44.168-443
+      name: RackNerd-DC02-CF-SEA-North America-Seattle-204 ms-104.16.44.168:443
       network: ws
       port: 443
       server:  104.16.44.168
@@ -977,7 +977,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-228 ms104.25.48.23-2053
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-228 ms-104.25.48.23:2053
       network: ws
       port: 2053
       server:  104.25.48.23
@@ -995,7 +995,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-228 ms104.19.27.121-2053
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-228 ms-104.19.27.121:2053
       network: ws
       port: 2053
       server:  104.19.27.121
@@ -1013,7 +1013,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-227 ms172.67.242.52-2053
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-227 ms-172.67.242.52:2053
       network: ws
       port: 2053
       server:  172.67.242.52
@@ -1031,7 +1031,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-228 ms104.19.122.99-2053
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-228 ms-104.19.122.99:2053
       network: ws
       port: 2053
       server:  104.19.122.99
@@ -1049,7 +1049,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-227 ms104.25.57.119-2053
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-227 ms-104.25.57.119:2053
       network: ws
       port: 2053
       server:  104.25.57.119
@@ -1067,7 +1067,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-244 ms104.24.56.12-2083
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-244 ms-104.24.56.12:2083
       network: ws
       port: 2083
       server:  104.24.56.12
@@ -1085,7 +1085,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-244 ms104.24.178.104-2083
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-244 ms-104.24.178.104:2083
       network: ws
       port: 2083
       server:  104.24.178.104
@@ -1103,7 +1103,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-248 ms162.159.27.209-2083
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-248 ms-162.159.27.209:2083
       network: ws
       port: 2083
       server:  162.159.27.209
@@ -1121,7 +1121,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-303 ms104.24.142.170-2083
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-303 ms-104.24.142.170:2083
       network: ws
       port: 2083
       server:  104.24.142.170
@@ -1139,7 +1139,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-255 ms104.25.44.28-2083
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-255 ms-104.25.44.28:2083
       network: ws
       port: 2083
       server:  104.25.44.28
@@ -1157,7 +1157,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-220 ms104.19.27.218-2087
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-220 ms-104.19.27.218:2087
       network: ws
       port: 2087
       server:  104.19.27.218
@@ -1175,7 +1175,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-218 ms162.159.247.10-2087
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-218 ms-162.159.247.10:2087
       network: ws
       port: 2087
       server:  162.159.247.10
@@ -1193,7 +1193,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-225 ms104.27.197.233-2087
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-225 ms-104.27.197.233:2087
       network: ws
       port: 2087
       server:  104.27.197.233
@@ -1211,7 +1211,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-228 ms104.27.127.218-2087
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-228 ms-104.27.127.218:2087
       network: ws
       port: 2087
       server:  104.27.127.218
@@ -1229,7 +1229,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-229 ms104.20.34.125-2087
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-229 ms-104.20.34.125:2087
       network: ws
       port: 2087
       server:  104.20.34.125
@@ -1247,7 +1247,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-308 ms162.159.43.193-2096
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-308 ms-162.159.43.193:2096
       network: ws
       port: 2096
       server:  162.159.43.193
@@ -1265,7 +1265,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-372 ms104.21.97.65-2096
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-372 ms-104.21.97.65:2096
       network: ws
       port: 2096
       server:  104.21.97.65
@@ -1283,7 +1283,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-399 ms104.24.10.177-2096
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-399 ms-104.24.10.177:2096
       network: ws
       port: 2096
       server:  104.24.10.177
@@ -1301,7 +1301,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-368 ms104.27.114.60-2096
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-368 ms-104.27.114.60:2096
       network: ws
       port: 2096
       server:  104.27.114.60
@@ -1319,7 +1319,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-335 ms104.27.108.149-2096
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-335 ms-104.27.108.149:2096
       network: ws
       port: 2096
       server:  104.27.108.149
@@ -1337,7 +1337,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-237 ms172.64.49.137-8443
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-237 ms-172.64.49.137:8443
       network: ws
       port: 8443
       server:  172.64.49.137
@@ -1355,7 +1355,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-230 ms104.27.24.172-8443
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-230 ms-104.27.24.172:8443
       network: ws
       port: 8443
       server:  104.27.24.172
@@ -1373,7 +1373,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-229 ms172.67.249.48-8443
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-229 ms-172.67.249.48:8443
       network: ws
       port: 8443
       server:  172.67.249.48
@@ -1391,7 +1391,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-233 ms172.64.38.25-8443
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-233 ms-172.64.38.25:8443
       network: ws
       port: 8443
       server:  172.64.38.25
@@ -1409,7 +1409,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LAX-North America-Los Angeles-234 ms104.25.25.53-8443
+      name: RackNerd-DC02-CF-LAX-North America-Los Angeles-234 ms-104.25.25.53:8443
       network: ws
       port: 8443
       server:  104.25.25.53
@@ -1427,7 +1427,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-190 ms104.18.24.139-443
+      name: RackNerd-DC02-CF-LHR-Europe-London-190 ms-104.18.24.139:443
       network: ws
       port: 443
       server:  104.18.24.139
@@ -1445,7 +1445,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-182 ms172.65.225.164-443
+      name: RackNerd-DC02-CF-LHR-Europe-London-182 ms-172.65.225.164:443
       network: ws
       port: 443
       server:  172.65.225.164
@@ -1463,7 +1463,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--FRA-Europe-Frankfurt-166 ms104.20.51.171-443
+      name: RackNerd-DC02-CF-FRA-Europe-Frankfurt-166 ms-104.20.51.171:443
       network: ws
       port: 443
       server:  104.20.51.171
@@ -1481,7 +1481,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-189 ms104.18.119.99-443
+      name: RackNerd-DC02-CF-LHR-Europe-London-189 ms-104.18.119.99:443
       network: ws
       port: 443
       server:  104.18.119.99
@@ -1499,7 +1499,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-180 ms104.19.234.123-443
+      name: RackNerd-DC02-CF-LHR-Europe-London-180 ms-104.19.234.123:443
       network: ws
       port: 443
       server:  104.19.234.123
@@ -1517,7 +1517,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-195 ms104.18.23.15-2053
+      name: RackNerd-DC02-CF-LHR-Europe-London-195 ms-104.18.23.15:2053
       network: ws
       port: 2053
       server:  104.18.23.15
@@ -1535,7 +1535,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-197 ms104.18.26.26-2053
+      name: RackNerd-DC02-CF-LHR-Europe-London-197 ms-104.18.26.26:2053
       network: ws
       port: 2053
       server:  104.18.26.26
@@ -1553,7 +1553,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-195 ms172.67.195.36-2053
+      name: RackNerd-DC02-CF-LHR-Europe-London-195 ms-172.67.195.36:2053
       network: ws
       port: 2053
       server:  172.67.195.36
@@ -1571,7 +1571,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-238 ms172.67.203.208-2053
+      name: RackNerd-DC02-CF-LHR-Europe-London-238 ms-172.67.203.208:2053
       network: ws
       port: 2053
       server:  172.67.203.208
@@ -1589,7 +1589,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-198 ms104.19.229.116-2053
+      name: RackNerd-DC02-CF-LHR-Europe-London-198 ms-104.19.229.116:2053
       network: ws
       port: 2053
       server:  104.19.229.116
@@ -1607,7 +1607,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-204 ms172.65.223.11-2083
+      name: RackNerd-DC02-CF-LHR-Europe-London-204 ms-172.65.223.11:2083
       network: ws
       port: 2083
       server:  172.65.223.11
@@ -1625,7 +1625,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-193 ms104.18.118.72-2083
+      name: RackNerd-DC02-CF-LHR-Europe-London-193 ms-104.18.118.72:2083
       network: ws
       port: 2083
       server:  104.18.118.72
@@ -1643,7 +1643,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-183 ms104.18.117.219-2083
+      name: RackNerd-DC02-CF-LHR-Europe-London-183 ms-104.18.117.219:2083
       network: ws
       port: 2083
       server:  104.18.117.219
@@ -1661,7 +1661,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-199 ms104.18.34.154-2083
+      name: RackNerd-DC02-CF-LHR-Europe-London-199 ms-104.18.34.154:2083
       network: ws
       port: 2083
       server:  104.18.34.154
@@ -1679,7 +1679,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-200 ms162.159.129.171-2083
+      name: RackNerd-DC02-CF-LHR-Europe-London-200 ms-162.159.129.171:2083
       network: ws
       port: 2083
       server:  162.159.129.171
@@ -1697,7 +1697,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--FRA-Europe-Frankfurt-166 ms104.20.51.210-2087
+      name: RackNerd-DC02-CF-FRA-Europe-Frankfurt-166 ms-104.20.51.210:2087
       network: ws
       port: 2087
       server:  104.20.51.210
@@ -1715,7 +1715,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--FRA-Europe-Frankfurt-166 ms104.20.63.139-2087
+      name: RackNerd-DC02-CF-FRA-Europe-Frankfurt-166 ms-104.20.63.139:2087
       network: ws
       port: 2087
       server:  104.20.63.139
@@ -1733,7 +1733,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--FRA-Europe-Frankfurt-167 ms104.20.55.185-2087
+      name: RackNerd-DC02-CF-FRA-Europe-Frankfurt-167 ms-104.20.55.185:2087
       network: ws
       port: 2087
       server:  104.20.55.185
@@ -1751,7 +1751,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-208 ms104.18.19.56-2087
+      name: RackNerd-DC02-CF-LHR-Europe-London-208 ms-104.18.19.56:2087
       network: ws
       port: 2087
       server:  104.18.19.56
@@ -1769,7 +1769,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--FRA-Europe-Frankfurt-162 ms104.20.58.205-2087
+      name: RackNerd-DC02-CF-FRA-Europe-Frankfurt-162 ms-104.20.58.205:2087
       network: ws
       port: 2087
       server:  104.20.58.205
@@ -1787,7 +1787,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-203 ms104.18.28.14-2096
+      name: RackNerd-DC02-CF-LHR-Europe-London-203 ms-104.18.28.14:2096
       network: ws
       port: 2096
       server:  104.18.28.14
@@ -1805,7 +1805,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-204 ms162.159.141.171-2096
+      name: RackNerd-DC02-CF-LHR-Europe-London-204 ms-162.159.141.171:2096
       network: ws
       port: 2096
       server:  162.159.141.171
@@ -1823,7 +1823,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-207 ms104.29.127.134-2096
+      name: RackNerd-DC02-CF-LHR-Europe-London-207 ms-104.29.127.134:2096
       network: ws
       port: 2096
       server:  104.29.127.134
@@ -1841,7 +1841,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-203 ms104.18.25.190-2096
+      name: RackNerd-DC02-CF-LHR-Europe-London-203 ms-104.18.25.190:2096
       network: ws
       port: 2096
       server:  104.18.25.190
@@ -1859,7 +1859,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-203 ms104.18.34.46-2096
+      name: RackNerd-DC02-CF-LHR-Europe-London-203 ms-104.18.34.46:2096
       network: ws
       port: 2096
       server:  104.18.34.46
@@ -1877,7 +1877,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-191 ms104.18.24.49-8443
+      name: RackNerd-DC02-CF-LHR-Europe-London-191 ms-104.18.24.49:8443
       network: ws
       port: 8443
       server:  104.18.24.49
@@ -1895,7 +1895,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--FRA-Europe-Frankfurt-175 ms104.20.48.177-8443
+      name: RackNerd-DC02-CF-FRA-Europe-Frankfurt-175 ms-104.20.48.177:8443
       network: ws
       port: 8443
       server:  104.20.48.177
@@ -1913,7 +1913,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-188 ms104.19.239.91-8443
+      name: RackNerd-DC02-CF-LHR-Europe-London-188 ms-104.19.239.91:8443
       network: ws
       port: 8443
       server:  104.19.239.91
@@ -1931,7 +1931,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-211 ms104.29.125.223-8443
+      name: RackNerd-DC02-CF-LHR-Europe-London-211 ms-104.29.125.223:8443
       network: ws
       port: 8443
       server:  104.29.125.223
@@ -1949,7 +1949,7 @@ proxies:
         - http/1.1
       alterId: 0
       cipher: auto
-      name: RackNerd-DC02-CF--LHR-Europe-London-196 ms162.159.136.45-8443
+      name: RackNerd-DC02-CF-LHR-Europe-London-196 ms-162.159.136.45:8443
       network: ws
       port: 8443
       server:  162.159.136.45
