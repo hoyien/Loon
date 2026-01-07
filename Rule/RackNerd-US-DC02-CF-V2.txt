@@ -1,9 +1,9 @@
-vmess://YXV0bzpmY2M0MmM5Zi1iZjIyLTQ2NmQtZjk2Ny0xZGJjMWI2MmY2YmVAY2YuMTEzOTgzLnh5ejo0NDM?path=/c2MAY9ae2sDS&remarks=RackNerd-DC02-CF-US---cf.113983.xyz:443&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
-vmess://Y2YuMTEzOTgzLnh5ejoyMDU?path=/c2MAY9ae2sDS&remarks=RackNerd-DC03-CF-US---cf.113983.xyz:2053&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
-vmess://Y2YuMTEzOTgzLnh5ejoyMDg?path=/c2MAY9ae2sDS&remarks=RackNerd-DC04-CF-US---cf.113983.xyz:2083&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
-vmess://Y2YuMTEzOTgzLnh5ejoyMDg?path=/c2MAY9ae2sDS&remarks=RackNerd-DC05-CF-US---cf.113983.xyz:2087&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
-vmess://Y2YuMTEzOTgzLnh5ejoyMDk?path=/c2MAY9ae2sDS&remarks=RackNerd-DC06-CF-US---cf.113983.xyz:2096&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
-vmess://Y2YuMTEzOTgzLnh5ejo4NDQ?path=/c2MAY9ae2sDS&remarks=RackNerd-DC07-CF-US---cf.113983.xyz:8443&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
+vmess://YXV0bzpmY2M0MmM5Zi1iZjIyLTQ2NmQtZjk2Ny0xZGJjMWI2MmY2YmVAY2YuMTEzOTgzLnh5ejo0NDM?path=/c2MAY9ae2sDS&remarks=RackNerd-DC02-CF-US-cf.113983.xyz:443&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
+vmess://Y2YuMTEzOTgzLnh5ejoyMDU?path=/c2MAY9ae2sDS&remarks=RackNerd-DC03-CF-US-cf.113983.xyz:2053&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
+vmess://Y2YuMTEzOTgzLnh5ejoyMDg?path=/c2MAY9ae2sDS&remarks=RackNerd-DC04-CF-US-cf.113983.xyz:2083&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
+vmess://Y2YuMTEzOTgzLnh5ejoyMDg?path=/c2MAY9ae2sDS&remarks=RackNerd-DC05-CF-US-cf.113983.xyz:2087&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
+vmess://Y2YuMTEzOTgzLnh5ejoyMDk?path=/c2MAY9ae2sDS&remarks=RackNerd-DC06-CF-US-cf.113983.xyz:2096&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
+vmess://Y2YuMTEzOTgzLnh5ejo4NDQ?path=/c2MAY9ae2sDS&remarks=RackNerd-DC07-CF-US-cf.113983.xyz:8443&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
 vmess://MTA0LjE4LjQ3LjI4OjQ0Mw=?path=/c2MAY9ae2sDS&remarks=RackNerd-DC08-CF-HKG-Asia Pacific-Hong Kong-104.18.47.28:443&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
 vmess://MTA0LjE3LjE1Ni4xNjg6NDQ?path=/c2MAY9ae2sDS&remarks=RackNerd-DC09-CF-HKG-Asia Pacific-Hong Kong-104.17.156.168:443&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
 vmess://MTA0LjE5LjYyLjI2OjQ0Mw=?path=/c2MAY9ae2sDS&remarks=RackNerd-DC10-CF-HKG-Asia Pacific-Hong Kong-104.19.62.26:443&obfs=websocket&tls=1&peer=cf.113983.xyz&allowInsecure=1&alpn=h3,h2,http/1.1&alterId=0
