@@ -1,1 +1,1 @@
-https://github.com/hoyien/Loon/raw/refs/heads/main/Rule/RackNerd-US-DC02-CF-Base64.txt
+https://github.com/hoyien/Loon/raw/refs/heads/main/Rule/RackNerd-US-DC02-CF-V2.txt
