@@ -1,1 +1,1 @@
-https://app.mitce.net/?sid=429493&token=srvhpsdb
+https://github.com/hoyien/Loon/raw/refs/heads/main/Rule/RackNerd-US-DC02-CF-Base64.txt
