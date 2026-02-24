@@ -2,4 +2,4 @@ https://www18.bigairport-twelfth-sub.com/api/v1/client/subscribe?token=208fd9560
 https://xtls.rprx.vision/api/v1/client/subscribe?token=05d8db92c59a49dea4785cd8433e9eae
 https://sub2.qingze-quick.top/api/v1/client/subscribe?token=0c5c1441f21db9b4151268514e8b8e14
 https://dash.yfjc.xyz/api/v1/client/subscribe?token=b6d26e8b7afcda7ea493aa33791a9c51
-https://dash.pqjc.site/api/v1/client/subscribe?token=b3230d563ca992b182651ade020f4ba8
+https://dash.pqjc.site/api/v1/pq/b3230d563ca992b182651ade020f4ba8
