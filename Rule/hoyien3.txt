@@ -1,3 +1,3 @@
-https://xtls.rprx.vision/api/v1/client/subscribe?token=05d8db92c59a49dea4785cd8433e9eae
-https://dash.yfjc.xyz/api/v1/client/subscribe?token=b6d26e8b7afcda7ea493aa33791a9c51
-https://dash.pqjc.site/api/v1/pq/b3230d563ca992b182651ade020f4ba8
+http://148.135.35.153:8299/hoyien3/download/zggj
+http://148.135.35.153:8299/hoyien3/download/cf
+http://148.135.35.153:8299/hoyien3/download/cm
